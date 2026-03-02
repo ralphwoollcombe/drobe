@@ -1,0 +1,17 @@
+{% extends 'base.html' %} {% load static %}
+{% block head %}
+
+{% endblock %} 
+{% block content %}
+<section class="profile-container">
+  <div class="user-img">
+    <img src="" alt="" />
+  </div>
+  <div class="user-details">
+    <h1>{{ profile.name }}</h1>
+    <div class="profile-actions">
+      <a href="{% url 'profile-update' profile.id %}" class="btn warn">Edit Profile</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

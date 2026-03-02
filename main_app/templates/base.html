@@ -23,13 +23,28 @@
         </div>
       </div>
       <nav class="bottom-nav-bar">
+            {% if user.is_authenticated %}
         <ul>
-            <li><a href="/my-drobe">My Drobe</a></li>
+          <li><a href="{% url 'profile-detail' user.id %}">Profile</a></li>
+          <li><a href="{% url 'garment-index' %}">My Drobe</a></li>
+          <li><a href="{% url 'garment-create' %}">Add garment</a></li>
+          <li><a href="/about">About</a></li>
+        </ul>
+        <ul>
+          <li>
+            <form id="logout-form" method="post" action="{% url 'logout' %}">
+              {% csrf_token %}
+              <button type="submit">Log out</button>
+            </form>
+          </li>
+        </ul>
+            {% else %}
+        <ul>
             <li><a href="/about">About</a></li>
+            <li><a href="{% url 'home' %}">Login</a></li>
+            <li><a href="{% url 'signup' %}">Sign Up</a></li>
         </ul>
-        <ul>
-            <li><a>Sign Out</a></li>
-        </ul>
+            {% endif %}
       </nav>
     </header>
     <main>

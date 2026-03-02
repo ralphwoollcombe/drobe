@@ -1,0 +1,73 @@
+{% extends 'base.html' %} {% load static %}
+{% block head %}
+<link
+  rel="stylesheet"
+  href="{% static 'css/garments/garment_detail.css' %}"
+/>
+{% endblock %} 
+{% block content %}
+<section class="title-section">
+    <div class="title-card">
+        <h1>{{ garment.name }}</h1>
+    </div>
+</section>
+<section class="garment-container">
+  <div class="cat-img">
+    <img src="" alt="" />
+  </div>
+    <div class="garment-details">
+        <div  class="cat-con-poi">
+            <div class="category-card">
+                <h2>Category:</h2>
+                <p>{{garment.category}}</p>
+            </div>
+            <div class="condition-card">
+                <h2>Condition:</h2>
+                <p>{{garment.condition}}</p>
+            </div>
+            <div class="points-card">
+                <h2>Points:</h2>
+                <p>{{garment.points_display}}</p>
+            </div>
+        </div>
+        <div class="sta-req">
+            <div class="status-card">
+                <h2>Status:</h2>
+                <p>{{garment.get_status_display}}</p>
+            </div>
+            <div class="request-card">
+                <h2>Request:</h2>
+                {% if garment.listing_type == 'gift' %}
+                <button>Adopt</button>
+                {% elif garment.listing_type == 'lend' %}
+                <button>Borrow</button>
+                {% else %}
+                <button>Borrow</button>
+                <button>Adopt</button>
+                {% endif %}
+            </div>
+        </div>
+        <div class="des-sto">
+            <div class="description-card">
+                <h2>Description:</h2>
+                <p>{{ garment.description }}</p>
+            </div>
+            <div class="story-card">
+                <h2>Story:</h2>
+                <p>{{ garment.story }}</p>
+            </div>
+        </div>
+    </div>
+    <section class="buttons">
+        <div><a href="" class="btn">User Profile</a></div>
+        <div class="garment-actions">
+            <a href="{% url 'garment-update' garment.id %}" class="btn warn">Edit Garment</a>
+            <a href="{% url 'garment-delete' garment.id %}" class="btn danger">Delete</a>
+        </div>
+    </section>
+
+</section>
+    <div>
+    </div>
+</section>
+{% endblock %}
