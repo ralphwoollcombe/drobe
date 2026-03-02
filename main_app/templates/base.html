@@ -1,0 +1,40 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" type="image/png" href="" />
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" />
+    <title>Drobe</title>
+    {% block head %} 
+    {% endblock %}
+  </head>
+  <body>
+    <header>
+      <div class="top-nav-bar">
+        <h1>Drobe</h1>
+        <div class="header-logo-container">
+            <a href="/">
+            <img src="" alt="Drobe Logo" />
+            </a>
+        </div>
+      </div>
+      <nav class="bottom-nav-bar">
+        <ul>
+            <li><a href="/my-drobe">My Drobe</a></li>
+            <li><a href="/about">About</a></li>
+        </ul>
+        <ul>
+            <li><a>Sign Out</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+     {% block content %} 
+     {% endblock %}
+     </main>
+  </body>
+</html>
