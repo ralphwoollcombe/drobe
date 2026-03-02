@@ -1,7 +1,7 @@
 {% extends 'base.html' %} {% load static %} {% block head %}
 <link
   rel="stylesheet"
-  href="{% static 'css/garments/garment-index.css' %}"
+  href="{% static 'css/garments/garment_list.css' %}"
 />
 {% endblock %} {% block content %}
 
@@ -10,7 +10,7 @@
 </section>
 
 <section class="card-container">
-  {% for item in garments %}
+  {% for item in garment_list %}
   <div class="card">
     <div class="card-content">
       <div class="card-img-container">

@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView
+from django.views.generic.edit import CreateView, UpdateView
 from .models import Garment
 
 def home(request):
@@ -10,4 +11,8 @@ def about(request):
 
 class GarmentList(ListView):
     model = Garment
+    fields = '__all_'
 
+class GarmentCreate(CreateView):
+    model = Garment
+    fields = '__all_'
