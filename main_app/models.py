@@ -65,13 +65,19 @@ class Profile(models.Model):
     )
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
-    location = models.CharField(max_length=100, blank=True)
-    biography = models.TextField(blank=True)
-    tagline = models.CharField(max_length=250, blank=True)
+    display_name = models.CharField(max_length=200, blank=True)
+    location = models.CharField(max_length=100, blank=True, default='location goes here')
+    biography = models.TextField(blank=True, default='Fill out your biography here')
+    tagline = models.CharField(max_length=250, blank=True, default='tagline goes here')
     points = models.IntegerField(default=10)
 
     def __str__(self):
-        return f"{self.display_name}'s Profile"
+        return f"{self.first_name}'s Profile"
+    
+    def save(self, *args, **kwargs):
+        self.display_name = f"{self.first_name} {self.last_name}".strip()
+        super().save(*args, **kwargs)
+
     
    
 class Garment(models.Model):

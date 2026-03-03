@@ -3,15 +3,34 @@
 
 {% endblock %} 
 {% block content %}
+
 <section class="profile-container">
-  <div class="user-img">
-    <img src="" alt="" />
-  </div>
-  <div class="user-details">
-    <h1>{{ profile.name }}</h1>
-    <div class="profile-actions">
-      <a href="{% url 'profile-update' profile.id %}" class="btn warn">Edit Profile</a>
+
+  <section class="column-one">
+    <img class="user-img" src="" alt="" />
+    {% if profile.display_name == '' %}
+    <h1 class="display_name">User's Profile</h1>
+    {% else %}
+    <h1 class="display_name">{{ profile.display_name }}'s Profile</h1>
+    {% endif %}
+    <h2 class="points">Points: {{ profile.points }}</h2>
+  </section>
+
+  <section class="column-two">
+    <h2 class="tagline">{{ profile.tagline }}</h2>
+    <p class="description">{{ profile.description }}</p>
+{% if profile.user == request.user %}
+    {% if not profile.biography and not profile.location %}
+    <div class="setup-prompt">
+      <h2>Welcome to Drobe!</h2>
+      <p>Complete your profile so others can get to know you.</p>
+      <a href="{% url 'profile-update' profile.id %}" class="btn submit">Set Up Profile</a>
     </div>
-  </div>
+    {% else %}
+      <a class="btn warn" href="{% url 'profile-update' profile.id %}" class="btn warn">Edit Profile</a>
+    {% endif %}
+{% endif %}
+  </section>
+
 </section>
 {% endblock %}

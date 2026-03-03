@@ -19,6 +19,14 @@ def about(request):
 class ProfileDetail(DetailView):
     model = Profile
 
+class ProfileCreate(CreateView):
+    model = Profile
+    fields = ['first_name', 'last_name', 'location', 'biography', 'tagline']
+
+class ProfileUpdate(UpdateView):
+    model = Profile
+    fields = ['first_name', 'last_name', 'location', 'biography', 'tagline']
+
 class GarmentList(LoginRequiredMixin, ListView):
     model = Garment
     fields = '__all_'
