@@ -12,7 +12,7 @@
     </div>
 </section>
 <section class="garment-container">
-  <div class="cat-img">
+  <div class="garment-img">
     <img src="" alt="" />
   </div>
     <div class="garment-details">
@@ -59,7 +59,7 @@
         </div>
     </div>
     <section class="buttons">
-        <div><a href="" class="btn">User Profile</a></div>
+        <div><a href="{% url 'profile-detail' garment.user.id %}"  class="btn">User Profile</a></div>
         <div class="garment-actions">
             <a href="{% url 'garment-update' garment.id %}" class="btn warn">Edit Garment</a>
             <a href="{% url 'garment-delete' garment.id %}" class="btn danger">Delete</a>

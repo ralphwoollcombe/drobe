@@ -1,0 +1,55 @@
+{% extends 'base.html' %} {% load static %}
+{% block head %}
+<link
+  rel="stylesheet"
+  href="{% static 'css/communities/community_detail.css' %}"
+/>
+{% endblock %} 
+{% block content %}
+<section class="title-section">
+    <div class="title-card">
+        <h1>{{ garment.name }}</h1>
+    </div>
+</section>
+<section class="community-container">
+  <div class="community-img">
+    <img src="" alt="" />
+  </div>
+    <div class="community-details">
+        <div class="description-card">
+            <h2>Description:</h2>
+            <p>{{ community.description }}</p>
+        </div>
+        <div class="location-card">
+            <h2>Location:</h2>
+            <p>{{community.location}}</p>
+        </div>
+        <div class="style-card">
+            <h2>Style Tags:</h2>
+            <p></p>
+        </div>
+        <div class="members-card">
+            <h2>Members:</h2>
+            {% for member in community.members %}
+            <div>
+                <a><img src="{% static 'images/admin_icon.png' %}" alt="community admin icon" /></a>
+                <p>{{ member.name }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <section class="buttons">
+    {% if community.created_by == request.user %}
+        <div>     
+            <a href="{% url 'community-update' community.id %}" class="btn warn">Edit Garment</a>
+            <a href="{% url 'community-delete' community.id %}" class="btn danger">Delete</a>
+        </div>
+    {% else %}
+    <button
+    </section>
+
+</section>
+    <div>
+    </div>
+</section>
+{% endblock %}

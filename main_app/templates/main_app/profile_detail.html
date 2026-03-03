@@ -1,8 +1,15 @@
 {% extends 'base.html' %} {% load static %}
 {% block head %}
-
+<link
+  rel="stylesheet"
+  href="{% static 'css/profile/profile_detail.css' %}"
+/>
 {% endblock %} 
 {% block content %}
+
+<section class="page-header">
+  <h1>Profile Page</h1>
+</section>
 
 <section class="profile-container">
 
@@ -18,7 +25,7 @@
 
   <section class="column-two">
     <h2 class="tagline">{{ profile.tagline }}</h2>
-    <p class="description">{{ profile.description }}</p>
+    <p class="description">{{ profile.biography }}</p>
 {% if profile.user == request.user %}
     {% if not profile.biography and not profile.location %}
     <div class="setup-prompt">
@@ -33,4 +40,32 @@
   </section>
 
 </section>
+
+<section class="drobe-container">
+  <section class="page-header">
+    {% if profile.user == request.user %}
+    <h1>My Drobe</h1>
+    {% else %}
+    <h1>Their Drobe</h1>
+    {% endif %}
+  </section>
+
+  <section class="card-container">
+    {% for item in garment_list %}
+    <div class="card">
+      <a href="{% url 'garment-detail' item.id %}">
+        <div class="card-content">
+          <div class="card-img-container">
+            <img src="" alt="" />
+          </div>
+          <h2 class="card-title">{{ item.name }}</h2>
+          <!-- <p>Points value: {{ item.points_value }}</p> -->
+        </div>
+      </a>
+    </div>
+    {% endfor %}
+  </section>
+</section>
+
+
 {% endblock %}

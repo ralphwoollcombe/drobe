@@ -25,9 +25,9 @@
       <nav class="bottom-nav-bar">
             {% if user.is_authenticated %}
         <ul>
-          <li><a href="{% url 'profile-detail' user.id %}">Profile</a></li>
+          <li><a href="{% url 'my-profile' %}">Profile</a></li>
           <li><a href="{% url 'garment-index' %}">My Drobe</a></li>
-          <li><a href="{% url 'garment-create' %}">Add garment</a></li>
+          <li><a href="{% url 'community-index' %}">Community</a></li>
           <li><a href="/about">About</a></li>
         </ul>
         <ul>

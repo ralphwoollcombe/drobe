@@ -1,0 +1,47 @@
+{% extends 'base.html' %} {% load static %} {% block head %}
+<link
+  rel="stylesheet"
+  href="{% static 'css/communities/community_list.css' %}"
+/>
+{% endblock %} {% block content %}
+
+<section class="page-header">
+  <h1>My Communities</h1>
+</section>
+
+<section class="card-container">
+  {% for community in community_list %}
+  <div class="card">
+        <h2 class="card-title">{{ community.name }}</h2>
+        <p>{{ community.location }}</p>
+        {% if community.created_by == request.user %}
+        <img src="{% static 'images/admin_icon.png' %}" alt="community admin icon" />
+        {% endif %}
+  </div>
+  {% endfor %}
+</section>
+
+<section class="more-communities-container">
+    <h2>Browse more communities</h2>
+    <div class="more-communities-cards">
+        {% for community in other_communities %}
+        <div class="card">
+            <a href="{% url 'garment-detail' item.id %}">
+            <div class="card-content">
+                <div class="card-img-container">
+                    <img src="" alt="" />
+                </div>
+                <h2 class="card-title">{{ community.name }}</h2>
+                <p>Location: {{ community.location }}</p>
+                <p>{{ community.members.count }} members</p>
+            </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="buttons">
+  <a href="{% url 'community-create' %}" class="add btn">Add community</a>
+</section>
+{% endblock %}

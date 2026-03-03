@@ -78,7 +78,8 @@ class Profile(models.Model):
         self.display_name = f"{self.first_name} {self.last_name}".strip()
         super().save(*args, **kwargs)
 
-    
+    def get_absolute_url(self):
+        return reverse('my-profile')
    
 class Garment(models.Model):
     name = models.CharField(max_length=100)
@@ -111,7 +112,23 @@ class Garment(models.Model):
     @property
     def points_display(self):
         return POINTS_WORDS.get(self.points_value, str(self.points_value))
+
+class Community(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField(max_length=250)
+    location = models.CharField(max_length=100)
+    style_focus = models.CharField(max_length=100)
+    created_at = models.DateTimeField(auto_now_add=True)
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='created_communities')
+    members = models.ManyToManyField(User, related_name='communities')
+
+    def __str__(self):
+        return self.name
     
+    class Meta:
+        ordering = ['-created_at']
+        verbose_name_plural = 'communities'
+
 @receiver(post_save, sender=User)
 def create_profile(sender, instance, created, **kwargs):
     if created:
