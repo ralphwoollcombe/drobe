@@ -15,7 +15,7 @@
 
   <section class="column-one">
     <div class="profile-img">
-      {% if community.image %}
+      {% if profile.image %}
         <img src="{{ profile.image.url }}" alt="{{ profile.name }}" />
       {% else %}
         <img src="{% static 'images/default-profile.png' %}" alt="default user image" />

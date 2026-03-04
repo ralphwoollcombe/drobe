@@ -14,6 +14,7 @@ urlpatterns = [
     path('my-drobe/create/', views.GarmentCreate.as_view(), name='garment-create'),
     path('my-drobe/<int:pk>/update/', views.GarmentUpdate.as_view(), name='garment-update'),
     path('my-drobe/<int:pk>/delete/', views.GarmentDelete.as_view(), name='garment-delete'),
+    path('my-drobe/<int:pk>/initiate-transaction/', views.initiate_transaction, name='initiate-transaction'),
 
     path('communities/', views.CommunityList.as_view(), name='community-index'),
     path('communities/<int:pk>/', views.CommunityDetail.as_view(), name='community-detail'),
@@ -22,6 +23,10 @@ urlpatterns = [
     path('communities/<int:pk>/delete/', views.CommunityDelete.as_view(), name='community-delete'),
     path('communities/<int:community_id>/associate-member/<int:user_id>/', views.associate_member, name='associate-member'),
     path('communities/<int:community_id>/remove-member/<int:user_id>/', views.remove_member, name='remove-member'),
+
+    path('transactions/', views.TransactionList.as_view(), name='transaction-index'),
+    path('transactions/<int:pk>/approve/', views.approve_transaction, name='approve-transaction'),
+    path('transactions/<int:pk>/decline/', views.decline_transaction, name='decline-transaction'),
 
     path('accounts/signup/', views.signup, name='signup'),
 

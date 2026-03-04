@@ -20,7 +20,7 @@
     {% endif %}
   </div>
     <div class="garment-details">
-        <div  class="cat-con-poi">
+        <div  class="cat-con-poi-sta">
             <div class="category-card">
                 <h2>Category:</h2>
                 <p>{{garment.category}}</p>
@@ -33,22 +33,13 @@
                 <h2>Points:</h2>
                 <p>{{garment.points_display}}</p>
             </div>
-        </div>
-        <div class="sta-req">
             <div class="status-card">
                 <h2>Status:</h2>
                 <p>{{garment.get_status_display}}</p>
             </div>
-            <div class="request-card">
-                <h2>Request:</h2>
-                {% if garment.listing_type == 'gift' %}
-                <button>Adopt</button>
-                {% elif garment.listing_type == 'lend' %}
-                <button>Borrow</button>
-                {% else %}
-                <button>Borrow</button>
-                <button>Adopt</button>
-                {% endif %}
+        </div>
+        <div class="garment-journey">
+            <div class="journey-card">
             </div>
         </div>
         <div class="des-sto">
@@ -64,10 +55,32 @@
     </div>
     <section class="buttons">
         <div><a href="{% url 'profile-detail' garment.user.id %}"  class="btn">User Profile</a></div>
+      {% if garment.user == request.user %}
         <div class="garment-actions">
             <a href="{% url 'garment-update' garment.id %}" class="btn warn">Edit Garment</a>
             <a href="{% url 'garment-delete' garment.id %}" class="btn danger">Delete</a>
         </div>
+        {% elif garment.status == 'available' %}
+        <div class="transaction-section">
+            <h3>Initiate Transaction</h3>
+            <form action="{% url 'initiate-transaction' garment.id %}" method="post" class="transaction-form">
+                {% csrf_token %}
+                {{ transaction_form.as_p }}
+                {% if garment.listing_type == 'gift' %}
+                    <button type="submit" name="adopt" class="btn submit">Adopt</button>
+                {% elif garment.listing_type == 'lend' %}
+                    <button type="submit" name="borrow" class="btn submit">Borrow</button>
+                {% else %}
+                    <button type="submit" name="borrow" class="btn submit">Borrow</button>
+                    <button type="submit" name="adopt" class="btn submit">Adopt</button>
+                {% endif %}
+            </form>
+        </div>
+        {% elif garment.status == 'pending' %}
+        <p>This garment has been requested</p>
+        {% else %}
+        <p>This garment has changed hands!</p>
+        {% endif %}
     </section>
 
 </section>

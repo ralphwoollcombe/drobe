@@ -16,6 +16,7 @@ CONDITION_CHOICES = [
 
 STATUS_CHOICES = [
         ('available', 'Available'),
+        ('pending', 'Pending'),
         ('borrowed', 'Borrowed'),
         ('gifted', 'Gifted')
     ]
@@ -58,6 +59,17 @@ POINTS_WORDS = {
     8: 'Eight',
     11: 'Eleven',
 }
+
+TRANSACTION_STATUS = [
+    ('pending', 'Pending'),
+    ('borrowed', 'Borrowed'),
+    ('gifted', 'Gifted'),
+]
+
+TRANSACTION_TYPE = [
+    ('lend', 'Lend'),
+    ('gift', 'Gift'),
+]
 
 class Profile(models.Model):
     user = models.OneToOneField(
@@ -136,6 +148,16 @@ class Community(models.Model):
     class Meta:
         ordering = ['-created_at']
         verbose_name_plural = 'communities'
+
+class Transaction(models.Model):
+    transaction_type = models.CharField(max_length=100, choices=TRANSACTION_TYPE)
+    status = models.CharField(max_length=100, choices=TRANSACTION_STATUS, default='pending')
+    message = models.CharField(max_length=250)
+    points_exchanged = models.IntegerField()
+    garment = models.ForeignKey(Garment, on_delete=models.CASCADE)
+    from_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='outgoing_transactions')
+    to_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='incoming_transactions')
+    created_at = models.DateTimeField(auto_now_add=True)
 
 @receiver(post_save, sender=User)
 def create_profile(sender, instance, created, **kwargs):
