@@ -50,9 +50,11 @@
 }
 
 .garment-img {
-  height: 50px;
-  width: 100px;
-  overflow: hidden;
+    width: 100%;
+    max-width: 500px;
+    height: 400px;
+    overflow: hidden;
+    border-radius: var(--card-border-radius);
 }
 
 .garment-img img {
