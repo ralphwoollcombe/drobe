@@ -95,9 +95,11 @@ class CommunityCreate(LoginRequiredMixin, CreateView):
     model = Community
     fields = ['name', 'description', 'location', 'style_focus']
 
-    # def form_valid(self, form):
-    #     form.instance.user = self.request.user 
-    #     return super().form_valid(form)
+    def form_valid(self, form):
+        form.instance.created_by = self.request.user 
+        response = super().form_valid(form)
+        self.object.members.add(self.request.user)
+        return response
     
 class CommunityDetail(LoginRequiredMixin, DetailView):
     model = Community
@@ -114,6 +116,15 @@ class CommunityDelete(LoginRequiredMixin, DeleteView):
     model = Community
     success_url = reverse_lazy('community-index')
 
+@login_required
+def associate_member(request, user_id, community_id):
+    Community.objects.get(id=community_id).members.add(user_id)
+    return redirect('community-detail', pk=community_id)
+
+@login_required
+def remove_member(request, user_id, community_id):
+    Community.objects.get(id=community_id).members.remove(user_id)
+    return redirect('community-detail', pk=community_id)
 
 def signup(request):
     error_message = ''

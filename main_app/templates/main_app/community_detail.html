@@ -8,7 +8,7 @@
 {% block content %}
 <section class="title-section">
     <div class="title-card">
-        <h1>{{ garment.name }}</h1>
+        <h1>{{ community.name }}</h1>
     </div>
 </section>
 <section class="community-container">
@@ -30,22 +30,31 @@
         </div>
         <div class="members-card">
             <h2>Members:</h2>
-            {% for member in community.members %}
-            <div>
-                <a><img src="{% static 'images/admin_icon.png' %}" alt="community admin icon" /></a>
-                <p>{{ member.name }}</p>
-            </div>
+            {% for member in community.members.all %}
+            <a href="{% url 'profile-detail' member.id %}"><div class="member">
+                <img src="{% static 'images/admin_icon.png' %}" alt="community member icon" />
+                <p>{{ member.first_name }} {{member.last_name}}</p>
+            </div></a>
             {% endfor %}
         </div>
     </div>
     <section class="buttons">
     {% if community.created_by == request.user %}
         <div>     
-            <a href="{% url 'community-update' community.id %}" class="btn warn">Edit Garment</a>
-            <a href="{% url 'community-delete' community.id %}" class="btn danger">Delete</a>
+            <a href="{% url 'community-update' community.id %}" class="btn warn">Edit Community</a>
+            <a href="{% url 'community-delete' community.id %}" class="btn danger">Delete Community</a>
         </div>
+    {% elif request.user not in community.members.all %}
+    <form action="{% url 'associate-member' community.id user.id %}" method="post">
+        {% csrf_token %}
+        <button>Join Community</button>
+    </form>
     {% else %}
-    <button
+    <form action="{% url 'remove-member' community.id user.id %}" method="post">
+        {% csrf_token %}
+        <button>Leave Community</button>
+    </form>
+    {% endif %}
     </section>
 
 </section>

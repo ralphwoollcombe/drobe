@@ -32,6 +32,8 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'main_app',
+    'cloudinary_storage',  
+    'cloudinary',          
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,6 +41,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dxhx8mbbz',
+    'API_KEY': '579633669316279',
+    'API_SECRET': 'aQz49I10MGP4RLJ0WmNIn4tWaW4',
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

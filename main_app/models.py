@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from cloudinary.models import CloudinaryField
+
 
 CONDITION_CHOICES = [
         (1, 'Poor'),
@@ -66,6 +68,7 @@ class Profile(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     display_name = models.CharField(max_length=200, blank=True)
+    image = CloudinaryField('image', default='placeholder') 
     location = models.CharField(max_length=100, blank=True, default='location goes here')
     biography = models.TextField(blank=True, default='Fill out your biography here')
     tagline = models.CharField(max_length=250, blank=True, default='tagline goes here')
@@ -92,6 +95,7 @@ class Garment(models.Model):
     points_value = models.IntegerField(editable=False)
     status = models.CharField(max_length=100, choices=STATUS_CHOICES, default='available')
     listing_type = models.CharField(max_length=100, choices=LISTING_TYPE_CHOICES)
+    image = CloudinaryField('image', default='placeholder')  
     created_at = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
@@ -118,12 +122,16 @@ class Community(models.Model):
     description = models.TextField(max_length=250)
     location = models.CharField(max_length=100)
     style_focus = models.CharField(max_length=100)
+    image = CloudinaryField('image', default='placeholder') 
     created_at = models.DateTimeField(auto_now_add=True)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='created_communities')
     members = models.ManyToManyField(User, related_name='communities')
 
     def __str__(self):
         return self.name
+    
+    def get_absolute_url(self):
+        return reverse('community-detail', kwargs={'pk': self.id})
     
     class Meta:
         ordering = ['-created_at']

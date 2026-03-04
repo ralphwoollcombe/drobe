@@ -51,6 +51,10 @@
   </section>
 
   <section class="card-container">
+    {% if profile.user == request.user and not garment_list.count %}
+    <p>There are not garments in your drobe yet!</p>
+    <a href="{% url 'garment-create' %}" class="add btn">Add your first garment</a>
+    {% else %}
     {% for item in garment_list %}
     <div class="card">
       <a href="{% url 'garment-detail' item.id %}">
@@ -64,6 +68,7 @@
       </a>
     </div>
     {% endfor %}
+    {% endif %}
   </section>
 </section>
 

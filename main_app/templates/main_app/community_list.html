@@ -10,15 +10,21 @@
 </section>
 
 <section class="card-container">
+  {% if not community_list.count %}
+  <p>You are not part of any communities yet!</p>
+  {% else %}
   {% for community in community_list %}
-  <div class="card">
-        <h2 class="card-title">{{ community.name }}</h2>
-        <p>{{ community.location }}</p>
+  <a href="{% url 'community-detail' community.id %}">
+    <div class="card">
+      <h2 class="card-title">{{ community.name }}</h2>
+      <p>{{ community.location }}</p>
         {% if community.created_by == request.user %}
-        <img src="{% static 'images/admin_icon.png' %}" alt="community admin icon" />
-        {% endif %}
-  </div>
+      <img src="{% static 'images/admin_icon.png' %}" alt="community admin icon" />
+        {% endif %}   
+    </div>
+  </a>
   {% endfor %}
+  {% endif %}
 </section>
 
 <section class="more-communities-container">
@@ -26,7 +32,7 @@
     <div class="more-communities-cards">
         {% for community in other_communities %}
         <div class="card">
-            <a href="{% url 'garment-detail' item.id %}">
+            <a href="{% url 'community-detail' community.id %}">
             <div class="card-content">
                 <div class="card-img-container">
                     <img src="" alt="" />

@@ -10,6 +10,9 @@
 </section>
 
 <section class="card-container">
+  {% if not garment_list.count %}
+  <p>There are no garments in your drobe yet!</p>
+  {% else %}
   {% for item in garment_list %}
   <div class="card">
     <a href="{% url 'garment-detail' item.id %}">
@@ -23,6 +26,7 @@
     </a>
   </div>
   {% endfor %}
+  {% endif %}
 </section>
 
 <section class="buttons">

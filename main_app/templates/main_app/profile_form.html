@@ -6,7 +6,11 @@
 {% block content %}
 
 <div class="page-header">
-    <h1>Edit your profile</h1>
+  {% if not profile.first_name or not profile.location %}  
+  <h1>Setup your profile</h1>
+  {% else %}
+  <h1>Edit your profile</h1>
+  {% endif %}
 </div>
 
 <form action="" method="post" class="form-container">
