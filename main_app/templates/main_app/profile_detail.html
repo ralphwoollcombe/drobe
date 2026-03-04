@@ -14,7 +14,13 @@
 <section class="profile-container">
 
   <section class="column-one">
-    <img class="user-img" src="" alt="" />
+    <div class="profile-img">
+      {% if community.image %}
+        <img src="{{ profile.image.url }}" alt="{{ profile.name }}" />
+      {% else %}
+        <img src="{% static 'images/default-profile.png' %}" alt="default user image" />
+      {% endif %}
+    </div>
     {% if profile.display_name == '' %}
     <h1 class="display_name">User's Profile</h1>
     {% else %}

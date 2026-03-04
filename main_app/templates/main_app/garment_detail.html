@@ -16,6 +16,13 @@
     <img src="" alt="" />
   </div>
     <div class="garment-details">
+        <div class="garment-img">
+        {% if garment.image %}
+            <img src="{{ garment.image.url }}" alt="{{ garment.name }}" />
+        {% else %}
+            <img src="{% static 'images/default-garment.png' %}" alt="default garment image" />
+        {% endif %}
+        </div>
         <div  class="cat-con-poi">
             <div class="category-card">
                 <h2>Category:</h2>

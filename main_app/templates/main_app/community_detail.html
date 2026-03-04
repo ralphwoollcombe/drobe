@@ -16,6 +16,13 @@
     <img src="" alt="" />
   </div>
     <div class="community-details">
+        <div class="community-img">
+        {% if community.image %}
+            <img src="{{ community.image.url }}" alt="{{ community.name }}" />
+        {% else %}
+            <img src="{% static 'images/default-community.png' %}" alt="default community image" />
+        {% endif %}
+        </div>
         <div class="description-card">
             <h2>Description:</h2>
             <p>{{ community.description }}</p>

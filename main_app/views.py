@@ -46,7 +46,7 @@ class ProfileCreate(CreateView):
 
 class ProfileUpdate(UpdateView):
     model = Profile
-    fields = ['first_name', 'last_name', 'location', 'biography', 'tagline']
+    fields = ['first_name', 'last_name', 'location', 'biography', 'tagline', 'image']
 
 class GarmentList(LoginRequiredMixin, ListView):
     model = Garment
@@ -57,7 +57,7 @@ class GarmentList(LoginRequiredMixin, ListView):
 
 class GarmentCreate(LoginRequiredMixin, CreateView):
     model = Garment
-    fields = ['name', 'story', 'description', 'brand', 'category', 'size', 'condition', 'listing_type']
+    fields = ['name', 'story', 'description', 'brand', 'category', 'size', 'condition', 'listing_type', 'image']
 
     def form_valid(self, form):
         form.instance.user = self.request.user 
@@ -93,7 +93,7 @@ class CommunityList(LoginRequiredMixin, ListView):
 
 class CommunityCreate(LoginRequiredMixin, CreateView):
     model = Community
-    fields = ['name', 'description', 'location', 'style_focus']
+    fields = ['name', 'description', 'location', 'style_focus', 'image']
 
     def form_valid(self, form):
         form.instance.created_by = self.request.user 
