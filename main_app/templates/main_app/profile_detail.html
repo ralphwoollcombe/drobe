@@ -9,7 +9,11 @@
 
 <section class="page-header">
   <div class="title-card">
-    <h1>Profile Page</h1>
+    {% if profile.display_name == '' %}
+      <h1 class="display_name">User's Profile</h1>
+    {% else %}
+      <h1 class="display_name">{{ profile.display_name }}'s Profile</h1>
+    {% endif %}
   </div>
 </section>
 
@@ -24,9 +28,9 @@
       {% endif %}
     </div>
     {% if profile.display_name == '' %}
-      <h2 class="display_name">User's Profile</h2>
+    <h2>User</h2>
     {% else %}
-      <h2 class="display_name">{{ profile.display_name }}'s <br/> Profile</h2>
+      <h2 class="display_name">{{ profile.display_name }}</h2>
     {% endif %}
 
     <span class="tag points">{{ profile.points }} Points</span>

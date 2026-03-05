@@ -1,167 +1,192 @@
-{% extends 'base.html' %} {% load static %} {% block head %}
+{% extends 'base.html' %} {% load static %}
+{% block head %}
 <link
   rel="stylesheet"
-  href="{% static 'css/transactions/transaction_list.css' %}"
+  href="{% static 'css/transactions/transaction_list.css' %}?{% now 'U' %}"
 />
-{% endblock %} {% block content %}
+{% endblock %}
+{% block content %}
 
 <section class="page-header">
   <div class="title-card">
-        <h1>Transactions</h1>
+    <h1>Transactions</h1>
   </div>
 </section>
 
-<section class="filter-buttons">
+<section class="filter-bar">
+  <div class="filter-group">
     <a href="{% url 'transaction-index' %}?direction=outgoing"
-       class="btn {% if direction == 'outgoing' %}active{% endif %}">
-        Outward
+       class="btn filter-btn {% if direction == 'outgoing' %}filter-active{% endif %}">
+      Outward
     </a>
     <a href="{% url 'transaction-index' %}?direction=incoming"
-       class="btn {% if direction == 'incoming' %}active{% endif %}">
-        Inward
+       class="btn filter-btn {% if direction == 'incoming' %}filter-active{% endif %}">
+      Inward
     </a>
-</section>
+  </div>
 
-<section class="secondary-buttons">
-    {% if direction == 'outgoing' %}
-    <div class="outgoing-secondary">
-        <a href="{% url 'transaction-index' %}?direction=outgoing&type=gift"
-        class="btn {% if type == 'gift' %}active{% endif %}">
-            Gifted
-        </a>
-        <a href="{% url 'transaction-index' %}?direction=outgoing&type=lend"
-        class="btn {% if type == 'lend' %}active{% endif %}">
-            Lent out
-        </a>
-    </div>
-    {% elif direction == 'incoming' %}
-    <div class="incoming-secondary">
-        <a href="{% url 'transaction-index' %}?direction=incoming&type=gift"
-        class="btn {% if type == 'gift' %}active{% endif %}">
-            My Gifts
-        </a>
-        <a href="{% url 'transaction-index' %}?direction=incoming&type=lend"
-        class="btn {% if type == 'lend' %}active{% endif %}">
-            Borrowed
-        </a>
-    </div>
-    {% endif %}
+  {% if direction == 'outgoing' %}
+  <div class="filter-group secondary">
+    <a href="{% url 'transaction-index' %}?direction=outgoing&type=gift"
+       class="btn filter-btn filter-btn-sm {% if type == 'gift' %}filter-active{% endif %}">
+      Gifted
+    </a>
+    <a href="{% url 'transaction-index' %}?direction=outgoing&type=lend"
+       class="btn filter-btn filter-btn-sm {% if type == 'lend' %}filter-active{% endif %}">
+      Lent Out
+    </a>
+  </div>
+  {% elif direction == 'incoming' %}
+  <div class="filter-group secondary">
+    <a href="{% url 'transaction-index' %}?direction=incoming&type=gift"
+       class="btn filter-btn filter-btn-sm {% if type == 'gift' %}filter-active{% endif %}">
+      My Gifts
+    </a>
+    <a href="{% url 'transaction-index' %}?direction=incoming&type=lend"
+       class="btn filter-btn filter-btn-sm {% if type == 'lend' %}filter-active{% endif %}">
+      Borrowed
+    </a>
+  </div>
+  {% endif %}
 </section>
-
 
 {% if direction and type %}
-<section class="transaction-container">
-    {% for transaction in transactions %}
-    <div class="transaction-card">
-        <div class="transaction-img">
-            {% if transaction.garment.image %}
-            <img src="{{ transaction.garment.image.url }}" alt="{{transaction.garment.name}}"/>
-            {% else %}
-            <img src="{% static 'images/default-garment.png' %}" alt="default garment image" />
-            {% endif %}
-        </div>
-        <div class="transaction-details">
-            <h2><a href="{% url 'garment-detail' transaction.garment.id %}">{{transaction.garment.name}}</a></h2>
-            {% if direction == 'outgoing' %}
-            <p>To: <a href="{% url 'profile-detail' transaction.to_user.id %}">{{transaction.to_user.display_name}}</a></p>
-            {% else %}
-            <p>From: <a href="{% url 'profile-detail' transaction.from_user.id %}">{{transaction.from_user.display_name}}</a></p>
-            {% endif %}
-            <p>Points: {{ transaction.points_exchanged }}</p>
-            <p>Status: {{ transaction.status }}</p>
-            <p>{{ transaction.created_at|date:"d M Y" }}</p>
-            {% if transaction.message %}
-                <p class="message">"{{ transaction.message }}"</p>
-            {% endif %}
-        </div>
+<section class="drobe-container">
+  {% for transaction in transactions %}
+  <div class="transaction-card">
+    <div class="transaction-img">
+      {% if transaction.garment.image %}
+        <img src="{{ transaction.garment.image.url }}" alt="{{ transaction.garment.name }}" />
+      {% else %}
+        <img src="{% static 'images/default-garment.png' %}" alt="default garment image" />
+      {% endif %}
     </div>
-    {% empty %}
-    <p>No transactions here yet.</p>
-    {% endfor %}
+    <div class="transaction-info">
+      <h2 class="transaction-title">
+        <a href="{% url 'garment-detail' transaction.garment.id %}">{{ transaction.garment.name }}</a>
+      </h2>
+      <div class="transaction-tags">
+        {% if direction == 'outgoing' %}
+          <span class="tag tag-user">
+            To: <a href="{% url 'profile-detail' transaction.to_user.id %}">{{ transaction.to_user.display_name }}</a>
+          </span>
+        {% else %}
+          <span class="tag tag-user">
+            From: <a href="{% url 'profile-detail' transaction.from_user.id %}">{{ transaction.from_user.display_name }}</a>
+          </span>
+        {% endif %}
+        <span class="tag tag-points">{{ transaction.points_exchanged }} pts</span>
+        <span class="tag tag-status">{{ transaction.status }}</span>
+      </div>
+      <span class="transaction-date">{{ transaction.created_at|date:"d M Y" }}</span>
+      {% if transaction.message %}
+        <p class="transaction-message">"{{ transaction.message }}"</p>
+      {% endif %}
+    </div>
+  </div>
+  {% empty %}
+    <div class="empty-drobe">
+      <p>No transactions here yet.</p>
+    </div>
+  {% endfor %}
 </section>
 {% elif direction %}
-<p>Select a category above to view transactions.</p>
+  <div class="prompt-message">
+    <p>Select a category above to view transactions.</p>
+  </div>
 {% else %}
-<p>Select outgoing or incoming to get started.</p>
+  <div class="prompt-message">
+    <p>Select outgoing or incoming to get started.</p>
+  </div>
 {% endif %}
 
-<section class="pending-section">
-    <h2>Pending Requests For Your Garments</h2>
-    <p>These are requests from other users wanting your garments.</p>
-    {% for transaction in pending_outgoing %}
-    <div class="transaction-card pending">
-        <div class="transaction-img">
-            {% if transaction.garment.image %}
-            <img src="{{ transaction.garment.image.url }}" alt="{{ transaction.garment.name }}"/>
-            {% else %}
-            <img src="{% static 'images/default-garment.png' %}" alt="default garment image" />
-            {% endif %}
-        </div>
-        <div class="transaction-details">
-            <h2>
-                <a href="{% url 'garment-detail' transaction.garment.id %}">
-                    {{ transaction.garment.name }}
-                </a>
-            </h2>
-            <p>From: 
-                <a href="{% url 'profile-detail' transaction.to_user.id %}">
-                    {{ transaction.to_user.profile.display_name }}
-                </a>
-            </p>
-            <p>Type: {{ transaction.get_transaction_type_display }}</p>
-            <p>Points: {{ transaction.points_exchanged }}</p>
-            <p>{{ transaction.created_at|date:"d M Y" }}</p>
-        </div>
-        <div class="transaction-actions">
-            <form action="{% url 'approve-transaction' transaction.id %}" method="post">
-                {% csrf_token %}
-                <button type="submit" class="btn submit">Approve</button>
-            </form>
-            <form action="{% url 'decline-transaction' transaction.id %}" method="post">
-                {% csrf_token %}
-                <button type="submit" class="btn danger">Decline</button>
-            </form>
-        </div>
+<div class="page-header">
+  <div class="title-card">
+    <h1>Pending Requests For Your Garments</h1>
+  </div>
+</div>
+
+<section class="drobe-container">
+  <p class="section-subtitle">These are requests from other users wanting your garments.</p>
+  {% for transaction in pending_outgoing %}
+  <div class="transaction-card pending">
+    <div class="transaction-img">
+      {% if transaction.garment.image %}
+        <img src="{{ transaction.garment.image.url }}" alt="{{ transaction.garment.name }}" />
+      {% else %}
+        <img src="{% static 'images/default-garment.png' %}" alt="default garment image" />
+      {% endif %}
     </div>
-    {% empty %}
-    <p>No pending requests for your garments.</p>
-    {% endfor %}
+    <div class="transaction-info">
+      <h2 class="transaction-title">
+        <a href="{% url 'garment-detail' transaction.garment.id %}">{{ transaction.garment.name }}</a>
+      </h2>
+      <div class="transaction-tags">
+        <span class="tag tag-user">
+          From: <a href="{% url 'profile-detail' transaction.to_user.id %}">{{ transaction.to_user.profile.display_name }}</a>
+        </span>
+        <span class="tag tag-type">{{ transaction.get_transaction_type_display }}</span>
+        <span class="tag tag-points">{{ transaction.points_exchanged }} pts</span>
+      </div>
+      <span class="transaction-date">{{ transaction.created_at|date:"d M Y" }}</span>
+    </div>
+    <div class="transaction-actions">
+      <form action="{% url 'approve-transaction' transaction.id %}" method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-sage">Approve</button>
+      </form>
+      <form action="{% url 'decline-transaction' transaction.id %}" method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Decline</button>
+      </form>
+    </div>
+  </div>
+  {% empty %}
+    <div class="empty-drobe">
+      <p>No pending requests for your garments.</p>
+    </div>
+  {% endfor %}
 </section>
 
-<section class="pending-section">
-    <h2>Your Pending Requests</h2>
-    <p>Garments you've requested that are waiting for approval.</p>
-    {% for transaction in pending_incoming %}
-    <div class="transaction-card pending">
-        <div class="transaction-img">
-            {% if transaction.garment.image %}
-            <img src="{{ transaction.garment.image.url }}" alt="{{ transaction.garment.name }}"/>
-            {% else %}
-            <img src="{% static 'images/default-garment.png' %}" alt="default garment image" />
-            {% endif %}
-        </div>
-        <div class="transaction-details">
-            <h2>
-                <a href="{% url 'garment-detail' transaction.garment.id %}">
-                    {{ transaction.garment.name }}
-                </a>
-            </h2>
-            <p>Owner: 
-                <a href="{% url 'profile-detail' transaction.from_user.id %}">
-                    {{ transaction.from_user.profile.display_name }}
-                </a>
-            </p>
-            <p>Type: {{ transaction.get_transaction_type_display }}</p>
-            <p>Points: {{ transaction.points_exchanged }}</p>
-            <p>{{ transaction.created_at|date:"d M Y" }}</p>
-        </div>
-        <div class="pending-status">
-            <p>Waiting for approval...</p>
-        </div>
+<div class="page-header">
+  <div class="title-card">
+    <h1>Your Pending Requests</h1>
+  </div>
+</div>
+
+<section class="drobe-container">
+  <p class="section-subtitle">Garments you've requested that are waiting for approval.</p>
+  {% for transaction in pending_incoming %}
+  <div class="transaction-card pending">
+    <div class="transaction-img">
+      {% if transaction.garment.image %}
+        <img src="{{ transaction.garment.image.url }}" alt="{{ transaction.garment.name }}" />
+      {% else %}
+        <img src="{% static 'images/default-garment.png' %}" alt="default garment image" />
+      {% endif %}
     </div>
-    {% empty %}
-    <p>You have no pending requests.</p>
-    {% endfor %}
+    <div class="transaction-info">
+      <h2 class="transaction-title">
+        <a href="{% url 'garment-detail' transaction.garment.id %}">{{ transaction.garment.name }}</a>
+      </h2>
+      <div class="transaction-tags">
+        <span class="tag tag-user">
+          Owner: <a href="{% url 'profile-detail' transaction.from_user.id %}">{{ transaction.from_user.profile.display_name }}</a>
+        </span>
+        <span class="tag tag-type">{{ transaction.get_transaction_type_display }}</span>
+        <span class="tag tag-points">{{ transaction.points_exchanged }} pts</span>
+      </div>
+      <span class="transaction-date">{{ transaction.created_at|date:"d M Y" }}</span>
+    </div>
+    <div class="pending-status">
+      <span class="tag tag-waiting">Awaiting approval</span>
+    </div>
+  </div>
+  {% empty %}
+    <div class="empty-drobe">
+      <p>You have no pending requests.</p>
+    </div>
+  {% endfor %}
 </section>
 
 {% endblock %}

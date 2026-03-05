@@ -1,39 +1,161 @@
+.form-wrapper {
+    max-width: 600px;
+    width: 80%;
+    margin: 0 auto 40px;
+    padding: 24px;
+    background: var(--background);
+    border: 2px solid var(--accent);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
 .form-container {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
 }
 
-table {
-  padding: 0 40px;
-  width: 100%;
-  border-spacing: 0 20px;
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
 }
 
-th {
-  text-align: left;
-  padding: 6px 20px 0 0;
-  font-weight: normal;
-  vertical-align: top;
-  font-size: var(--font-reg);
+.form-field label {
+    font-size: 1.3rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--text);
 }
 
-td {
-  max-width: 60%;
+.form-field input[type="text"],
+.form-field input[type="number"],
+.form-field input[type="email"],
+.form-field input[type="password"],
+.form-field input[type="url"],
+.form-field textarea,
+.form-field select {
+    width: 100%;
+    padding: 10px 14px;
+    font-size: 1.4rem;
+    font-family: inherit;
+    color: var(--text);
+    background: white;
+    border: 2px solid var(--accent);
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-td > * {
-  width: 100%;
-  padding: 2px 4px;
-  font-size: var(--font-l);
+.form-field input:focus,
+.form-field textarea:focus,
+.form-field select:focus {
+    border-color: var(--nav-bg);
+    box-shadow: 0 0 0 3px rgba(153, 175, 143, 0.25);
 }
 
-td > textarea {
-  height: calc(4 * var(--font-l) + 8px);
-  font-family: inherit;
+.form-field textarea {
+    min-height: 100px;
+    resize: vertical;
 }
 
-.btn {
-  align-self: flex-end;
-  margin-right: 40px;
+.form-field select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%232D3436' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+}
+
+.form-field input[type="file"] {
+    font-size: 1.2rem;
+    color: var(--text);
+    padding: 8px;
+    border: 2px dashed var(--accent);
+    border-radius: 8px;
+    background: rgba(209, 166, 123, 0.1);
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+}
+
+.form-field input[type="file"]:hover {
+    border-color: var(--nav-bg);
+}
+
+.form-field input[type="file"]::file-selector-button {
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: none;
+    background: var(--nav-bg);
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-right: 10px;
+    transition: background 0.2s ease;
+}
+
+.form-field input[type="file"]::file-selector-button:hover {
+    background: var(--nav-bg-ff);
+}
+
+.form-field input[type="checkbox"],
+.form-field input[type="radio"] {
+    width: auto;
+    accent-color: var(--nav-bg);
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+.help-text {
+    font-size: 1.1rem;
+    color: var(--text);
+    opacity: 0.6;
+    font-style: italic;
+    line-height: 1.4;
+}
+
+.field-error {
+    font-size: 1.1rem;
+    color: var(--danger);
+    font-weight: 500;
+}
+
+.form-errors {
+    background: rgba(220, 20, 30, 0.08);
+    border: 1px solid var(--danger);
+    border-radius: 8px;
+    padding: 10px 14px;
+}
+
+.form-errors p {
+    margin: 0;
+    font-size: 1.2rem;
+    color: var(--danger);
+    font-weight: 500;
+}
+
+.form-container .btn-sage {
+    align-self: center;
+    padding: 10px 36px;
+    font-size: 1.4rem;
+    margin-top: 8px;
+}
+
+.btn-sage {
+    background: var(--nav-bg);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    letter-spacing: 0.5px;
+    transition: all 0.2s ease;
+}
+
+.btn-sage:hover {
+    background: var(--nav-bg-ff);
 }

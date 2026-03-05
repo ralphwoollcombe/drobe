@@ -1,24 +1,49 @@
 {% extends 'base.html' %} 
 {% load static %} 
 {% block head %}
-<link rel="stylesheet" href="{% static 'css/form.css' %}" />
+<link rel="stylesheet" href="{% static 'css/form.css' %}?{% now 'U' %}" />
 {% endblock %} 
 {% block content %}
 
-<div class="page-header">
-  {% if object %}
-    <h1>Edit {{ object.name }}</h1>
-  {% else %}
-    <h1>Add a garment to your Drobe!</h1>
-  {% endif %}
-</div>
+<section class="page-header">
+  <div class="title-card">
+    {% if object %}
+      <h1>Edit {{ object.name }}</h1>
+    {% else %}
+      <h1>Add to your Drobe!</h1>
+    {% endif %}
+  </div>
+</section>
 
-<form action="" method="post" class="form-container" enctype="multipart/form-data">
-  {% csrf_token %}
-  <table>
-    {{ form.as_table }}
-  </table>
-  <button type="submit" class="btn submit">Submit!</button>
-</form>
+<section class="form-wrapper">
+  <form action="" method="post" class="form-container" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    {% for field in form %}
+    <div class="form-field">
+      <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+      {{ field }}
+      {% if field.help_text %}
+        <span class="help-text">{{ field.help_text }}</span>
+      {% endif %}
+      {% for error in field.errors %}
+        <span class="field-error">{{ error }}</span>
+      {% endfor %}
+    </div>
+    {% endfor %}
+
+    {% if form.non_field_errors %}
+    <div class="form-errors">
+      {% for error in form.non_field_errors %}
+        <p class="field-error">{{ error }}</p>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <button type="submit" class="btn btn-sage">
+      {% if object %}Save Changes{% else %}Submit{% endif %}
+    </button>
+  </form>
+</section>
 
 {% endblock %}

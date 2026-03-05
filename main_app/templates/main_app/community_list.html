@@ -1,9 +1,11 @@
-{% extends 'base.html' %} {% load static %} {% block head %}
+{% extends 'base.html' %} {% load static %}
+{% block head %}
 <link
   rel="stylesheet"
-  href="{% static 'css/communities/community_list.css' %}"
+  href="{% static 'css/communities/community_list.css' %}?{% now 'U' %}"
 />
-{% endblock %} {% block content %}
+{% endblock %}
+{% block content %}
 
 <section class="page-header">
   <div class="title-card">
@@ -11,45 +13,78 @@
   </div>
 </section>
 
-<section class="card-container">
-  {% if not community_list.count %}
-  <p>You are not part of any communities yet!</p>
-  {% else %}
-  {% for community in community_list %}
-  <a href="{% url 'community-detail' community.id %}">
-    <div class="card">
-      <h2 class="card-title">{{ community.name }}</h2>
-      <p>{{ community.location }}</p>
-        {% if community.created_by == request.user %}
-      <img src="{% static 'images/admin_icon.png' %}" alt="community admin icon" />
-        {% endif %}   
-    </div>
-  </a>
-  {% endfor %}
-  {% endif %}
+<section class="drobe-container">
+  <section class="card-container">
+    {% if not community_list.count %}
+      <div class="empty-drobe">
+        <p>You are not part of any communities yet!</p>
+        <a href="#browse" class="btn btn-sage">Browse communities below</a>
+      </div>
+    {% else %}
+      {% for community in community_list %}
+      <a href="{% url 'community-detail' community.id %}" class="card">
+        <div class="card-img-container">
+          {% if community.image %}
+            <img src="{{ community.image.url }}" alt="{{ community.name }}" />
+          {% else %}
+            <img src="{% static 'images/default-community.png' %}" alt="default community image" />
+          {% endif %}
+        </div>
+        <div class="card-info">
+          <h2 class="card-title">{{ community.name }}</h2>
+          <div class="card-tags">
+            <span class="tag tag-location">{{ community.location }}</span>
+            {% if community.created_by == request.user %}
+              <span class="tag tag-admin">
+                <img src="{% static 'images/admin_icon.png' %}" alt="admin" class="admin-icon" />
+                Admin
+              </span>
+            {% endif %}
+          </div>
+        </div>
+      </a>
+      {% endfor %}
+    {% endif %}
+  </section>
 </section>
 
-<section class="more-communities-container">
-    <h2>Browse more communities</h2>
-    <div class="more-communities-cards">
-        {% for community in other_communities %}
-        <div class="card">
-            <a href="{% url 'community-detail' community.id %}">
-            <div class="card-content">
-                <div class="card-img-container">
-                    <img src="" alt="" />
-                </div>
-                <h2 class="card-title">{{ community.name }}</h2>
-                <p>Location: {{ community.location }}</p>
-                <p>{{ community.members.count }} members</p>
-            </div>
-            </a>
+<div class="page-header" id="browse">
+  <div class="title-card">
+    <h1>Browse Communities</h1>
+  </div>
+</div>
+
+<section class="drobe-container">
+  <section class="card-container">
+    {% if not other_communities.count %}
+      <div class="empty-drobe">
+        <p>No other communities to show right now.</p>
+      </div>
+    {% else %}
+      {% for community in other_communities %}
+      <a href="{% url 'community-detail' community.id %}" class="card">
+        <div class="card-img-container">
+          {% if community.image %}
+            <img src="{{ community.image.url }}" alt="{{ community.name }}" />
+          {% else %}
+            <img src="{% static 'images/default-community.png' %}" alt="default community image" />
+          {% endif %}
         </div>
-        {% endfor %}
-    </div>
+        <div class="card-info">
+          <h2 class="card-title">{{ community.name }}</h2>
+          <div class="card-tags">
+            <span class="tag tag-location">{{ community.location }}</span>
+            <span class="tag tag-members">{{ community.members.count }} members</span>
+          </div>
+        </div>
+      </a>
+      {% endfor %}
+    {% endif %}
+  </section>
 </section>
 
 <section class="buttons">
-  <a href="{% url 'community-create' %}" class="add btn">Add community</a>
+  <a href="{% url 'community-create' %}" class="btn btn-sage">Add community</a>
 </section>
+
 {% endblock %}

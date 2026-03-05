@@ -1,7 +1,7 @@
 
 html {
   box-sizing: border-box;
-  background: var(--background);
+  background: #fff8eb;
 }
 
 *, 
@@ -159,9 +159,6 @@ nav ul {
   }
 
 .page-header {
-  /* display: flex;
-  align-items: center;
-  margin: 20px; */
   filter: drop-shadow(3px 3px 4px #aaa); 
 }
 
@@ -171,7 +168,8 @@ nav ul {
   flex-direction: row;
   justify-content: center;
   text-transform: uppercase;
-  background-color: var(--primary);
+  background: var(--primary);
+  border: 8px solid var(--primary);
   clip-path: polygon(0% 0%, 100% 0%, 90% 100%, 10% 100%);
 }
 
@@ -213,13 +211,13 @@ nav ul {
   border-color: var(--danger);
 }
 
-.page-header h1 {
-  font-size: var(--font-xxl);
-  margin: 0;
-}
 
-.title-card .detail-title h1 {
-  font-size: 1.6rem;
+.title-card h1 {
+  font-size: var(--font-xl);
+  color: rgb(78, 43, 0);
+  letter-spacing: 1.2px;
+  font-weight: 500;
+  margin: 7px;
 }
 
 .page-header img {
