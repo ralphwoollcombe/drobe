@@ -201,3 +201,74 @@
     background: var(--danger);
     color: white;
 }
+
+@media only screen and (min-width: 768px) {
+
+    .title-card h1 {
+        font-size: var(--font-xxl);
+    }
+
+    .page-container {
+        max-width: 750px;
+        padding: 0 24px 24px;
+    }
+
+    .garment-img {
+        width: calc(100% + 48px);     
+        margin: 0 -24px;
+        height: 450px;
+    }
+
+    .garment-details {
+        gap: 16px;
+        padding: 20px 0;
+    }
+
+    .container {
+        padding: 18px 22px;
+    }
+
+    .info-row {
+        flex-wrap: nowrap;             
+        gap: 14px;
+    }
+
+    .info-card h2 {
+        font-size: 1.3rem;
+    }
+
+    .tag {
+        font-size: 1.3rem;
+        padding: 5px 16px;
+    }
+
+    .journey-row h2 {
+        font-size: 1.5rem;
+    }
+
+    .placeholder-text {
+        font-size: 1.3rem;
+    }
+
+    .text-row {
+        gap: 16px;
+    }
+
+    .text-card h2 {
+        font-size: 1.4rem;
+    }
+
+    .text-card p {
+        font-size: 1.4rem;
+    }
+
+    .action-bar {
+        padding: 20px 0 0;
+        gap: 14px;
+    }
+
+    .btn {
+        font-size: 1.4rem;
+        padding: 10px 22px;
+    }
+}

@@ -184,3 +184,73 @@
     background: var(--danger);
     color: white;
 }
+
+@media only screen and (min-width: 768px) {
+
+    .page-container {
+        max-width: 750px;
+    }
+
+    .community-img {
+        height: 350px;
+    }
+
+    .community-details {
+        gap: 18px;
+        padding: 24px 24px 0;
+    }
+
+    .info-row {
+        flex-wrap: nowrap;
+        gap: 16px;
+        padding: 18px 22px;
+    }
+
+    .info-card h2 {
+        font-size: 1.3rem;
+    }
+
+    .tag {
+        font-size: 1.3rem;
+        padding: 5px 16px;
+    }
+
+    .container {
+        padding: 18px 22px;
+    }
+
+    .container h2 {
+        font-size: 1.4rem;
+    }
+
+    .container p {
+        font-size: var(--font-l);
+    }
+
+    .members-grid {
+        gap: 20px;
+        padding: 12px 0;
+    }
+
+    .member-img {
+        width: 64px;
+        height: 64px;
+    }
+
+    .member-name {
+        font-size: 1.2rem;
+        max-width: 80px;
+    }
+
+    .action-bar {
+        padding: 24px 24px 0;
+        gap: 14px;
+    }
+
+    .btn-sage,
+    .btn-warm,
+    .btn-danger {
+        font-size: 1.4rem;
+        padding: 10px 24px;
+    }
+}

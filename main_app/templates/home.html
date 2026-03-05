@@ -1,18 +1,72 @@
 {% extends 'base.html' %} 
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/form.css' %}?{% now 'U' %}" />
+{% endblock %}
 {% block content %}
 
-<h1>Home</h1>
-<p class="page-content"></p>
-
 {% if not user.is_authenticated %}
-  <section>
-    <form action="{% url 'home' %}" method="post" class="login">
-      <h1>Login</h1>
-      {% csrf_token %} {{ form.as_p }}
-      <input type="hidden" name="next" value="{{ next }}" />
-      <button type="submit" class="btn submit">Login</button>
-    </form>
-  </section>
+
+<section class="page-header">
+  <div class="title-card">
+    <h1>Welcome to Drobe</h1>
+  </div>
+</section>
+
+<section class="form-wrapper">
+  {% if form.non_field_errors %}
+  <div class="form-errors">
+    {% for error in form.non_field_errors %}
+      <p class="field-error">{{ error }}</p>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <form action="{% url 'home' %}" method="post" class="form-container">
+    {% csrf_token %}
+
+    {% for field in form %}
+    <div class="form-field">
+      <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+      {{ field }}
+      {% if field.help_text %}
+        <span class="help-text">{{ field.help_text|safe }}</span>
+      {% endif %}
+      {% for error in field.errors %}
+        <span class="field-error">{{ error }}</span>
+      {% endfor %}
+    </div>
+    {% endfor %}
+
+    <input type="hidden" name="next" value="{{ next }}" />
+    <button type="submit" class="btn btn-sage">Log In</button>
+  </form>
+
+  <div class="form-footer">
+    <p>Don't have an account? <a href="{% url 'signup' %}" class="form-link">Sign up here</a></p>
+  </div>
+</section>
+
+{% else %}
+
+<section class="page-header">
+  <div class="title-card">
+    <h1>Welcome back, {{ user.profile.display_name }}!</h1>
+  </div>
+</section>
+
+<section class="form-wrapper welcome-wrapper">
+  <div class="welcome-content">
+    <h2>What would you like to do?</h2>
+    <div class="welcome-links">
+      <a href="{% url 'my-profile' %}" class="btn btn-sage">My Profile</a>
+      <a href="{% url 'garment-index' %}" class="btn btn-sage">My Drobe</a>
+      <a href="{% url 'community-index' %}" class="btn btn-sage">Communities</a>
+      <!-- <a href="{% url 'transaction-index' %}" class="btn btn-warm">Transactions</a> -->
+    </div>
+  </div>
+</section>
+
 {% endif %}
 
 {% endblock %}

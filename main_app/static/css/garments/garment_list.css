@@ -122,3 +122,47 @@
 .btn-sage:hover {
     background: var(--nav-bg-ff);
 }
+
+@media only screen and (min-width: 768px) {
+
+    .drobe-container {
+        max-width: 750px;
+        width: 85%;
+        padding: 16px 24px 24px;
+    }
+
+    .card-container {
+        gap: 24px;
+        padding: 14px 0;
+    }
+
+    .card {
+        width: 180px;
+        height: auto;             
+    }
+
+    .card-img-container {
+        height: 180px;           
+    }
+
+    .card-info {
+        padding: 10px 12px 14px;
+    }
+
+    .card-title {
+        font-size: 1.3rem;
+    }
+
+    .tag {
+        font-size: 1.1rem;
+        padding: 4px 12px;
+    }
+
+    .empty-drobe p {
+        font-size: var(--font-l);
+    }
+
+    .buttons {
+        padding: 0 0 50px;
+    }
+}
