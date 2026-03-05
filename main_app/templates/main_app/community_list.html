@@ -23,24 +23,17 @@
     {% else %}
       {% for community in community_list %}
       <a href="{% url 'community-detail' community.id %}" class="card">
-        <div class="card-img-container">
-          {% if community.image %}
-            <img src="{{ community.image.url }}" alt="{{ community.name }}" />
-          {% else %}
-            <img src="{% static 'images/default-community.png' %}" alt="default community image" />
-          {% endif %}
-        </div>
         <div class="card-info">
-          <h2 class="card-title">{{ community.name }}</h2>
           <div class="card-tags">
-            <span class="tag tag-location">{{ community.location }}</span>
+            <h2 class="card-title">{{ community.name }}</h2>
             {% if community.created_by == request.user %}
               <span class="tag tag-admin">
                 <img src="{% static 'images/admin_icon.png' %}" alt="admin" class="admin-icon" />
                 Admin
               </span>
             {% endif %}
-          </div>
+            </div>
+            <span class="tag tag-location">{{ community.location }}</span>
         </div>
       </a>
       {% endfor %}
@@ -51,7 +44,7 @@
 
 
 <div id="browse">
-      <h1>Browse Communities</h1>
+      <h1>Browse More Communities</h1>
   </div>
 <section class="drobe-container">
 <section class="card-container">
@@ -63,17 +56,12 @@
       {% for community in other_communities %}
       <a href="{% url 'community-detail' community.id %}" class="card">
         <div class="card-img-container">
-          {% if community.image %}
-            <img src="{{ community.image.url }}" alt="{{ community.name }}" />
-          {% else %}
-            <img src="{% static 'images/default-community.png' %}" alt="default community image" />
-          {% endif %}
         </div>
         <div class="card-info">
           <h2 class="card-title">{{ community.name }}</h2>
           <div class="card-tags">
-            <span class="tag tag-location">{{ community.location }}</span>
             <span class="tag tag-members">{{ community.members.count }} members</span>
+            <span class="tag tag-location">{{ community.location }}</span>
           </div>
         </div>
       </a>

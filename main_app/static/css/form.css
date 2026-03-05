@@ -159,3 +159,61 @@
 .btn-sage:hover {
     background: var(--nav-bg-ff);
 }
+
+.delete-wrapper {
+    text-align: center;
+    max-width: 500px;
+}
+
+.delete-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--accent);
+    margin-bottom: 20px;
+}
+
+.delete-warning {
+    font-size: var(--font-l);
+    color: var(--text);
+    margin: 0;
+    font-weight: 400;
+}
+
+.delete-name {
+    font-size: var(--font-xl);
+    color: var(--danger);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.delete-message {
+    font-size: 1.2rem;
+    color: var(--text);
+    opacity: 0.6;
+    font-style: italic;
+    margin: 0;
+    line-height: 1.5;
+}
+
+.delete-actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 12px;
+}
+
+
+.btn-danger {
+    background: var(--background);
+    color: var(--danger);
+    border: 1px solid var(--danger);
+}
+
+.btn-danger:hover {
+    background: var(--danger);
+    color: white;
+}

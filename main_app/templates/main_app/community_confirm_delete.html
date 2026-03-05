@@ -1,19 +1,28 @@
-{% extends 'base.html' %}  
-{% load static %} 
+{% extends 'base.html' %} 
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/form.css' %}?{% now 'U' %}" />
+{% endblock %}
 {% block content %}
 
-<div class="page-header">
-  <h1>Delete Community?</h1>
-  <img src="" alt="" />
-</div>
+<section class="page-header">
+  <div class="title-card">
+    <h1>Delete Community</h1>
+  </div>
+</section>
 
-<h2>Are you sure you want to delete {{ community.name }}?</h2>
+<section class="form-wrapper delete-wrapper">
+  <div class="delete-content">
+    <h2 class="delete-warning">Are you sure you want to delete</h2>
+    <span class="delete-name">{{ community.name }}?</span>
+    <p class="delete-message">This action cannot be undone. All community data will be permanently removed.</p>
+  </div>
 
-<form action="" method="post" class="form">
-  {% csrf_token %}
-  <a href="{% url 'community-detail' community.id %}" class="btn secondary">Cancel</a>
-  <button type="submit" class="btn danger">Yes - Delete!</button>
-</form>
+  <form action="" method="post" class="delete-actions">
+    {% csrf_token %}
+    <a href="{% url 'community-detail' community.id %}" class="btn btn-sage">Cancel</a>
+    <button type="submit" class="btn btn-danger">Yes — Delete!</button>
+  </form>
+</section>
 
 {% endblock %}
-
