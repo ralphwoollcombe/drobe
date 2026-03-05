@@ -2,81 +2,93 @@
 {% block head %}
 <link
   rel="stylesheet"
-  href="{% static 'css/profile/profile_detail.css' %}"
+  href="{% static 'css/profile/profile_detail.css' %}?{% now 'U' %}"
 />
 {% endblock %} 
 {% block content %}
 
 <section class="page-header">
-  <h1>Profile Page</h1>
+  <div class="title-card">
+    <h1>Profile Page</h1>
+  </div>
 </section>
 
-<section class="profile-container">
+<section class="page-container">
 
   <section class="column-one">
     <div class="profile-img">
       {% if profile.image %}
-        <img src="{{ profile.image.url }}" alt="{{ profile.name }}" />
+        <img src="{{ profile.image.url }}" alt="{{ profile.display_name }}" />
       {% else %}
         <img src="{% static 'images/default-profile.png' %}" alt="default user image" />
       {% endif %}
     </div>
     {% if profile.display_name == '' %}
-    <h1 class="display_name">User's Profile</h1>
+      <h2 class="display_name">User's Profile</h2>
     {% else %}
-    <h1 class="display_name">{{ profile.display_name }}'s Profile</h1>
+      <h2 class="display_name">{{ profile.display_name }}'s <br/> Profile</h2>
     {% endif %}
-    <h2 class="points">Points: {{ profile.points }}</h2>
+
+    <span class="tag points">{{ profile.points }} Points</span>
   </section>
 
   <section class="column-two">
-    <h2 class="tagline">{{ profile.tagline }}</h2>
-    <p class="description">{{ profile.biography }}</p>
-{% if profile.user == request.user %}
-    {% if not profile.biography and not profile.location %}
-    <div class="setup-prompt">
-      <h2>Welcome to Drobe!</h2>
-      <p>Complete your profile so others can get to know you.</p>
-      <a href="{% url 'profile-update' profile.id %}" class="btn submit">Set Up Profile</a>
-    </div>
-    {% else %}
-      <a class="btn warn" href="{% url 'profile-update' profile.id %}" class="btn warn">Edit Profile</a>
+
+    {% if profile.tagline %}
+      <h2 class="tagline">"{{ profile.tagline }}"</h2>
     {% endif %}
-{% endif %}
+
+    {% if profile.biography %}
+      <p class="description">{{ profile.biography }}</p>
+    {% endif %}
+
+    {% if profile.user == request.user %}
+      {% if not profile.biography and not profile.location %}
+        <div class="setup-prompt">
+          <h2>Welcome to Drobe!</h2>
+          <p>Complete your profile so others can get to know you.</p>
+          <a href="{% url 'profile-update' profile.id %}" class="btn btn-sage">Set Up Profile</a>
+        </div>
+      {% else %}
+        <a href="{% url 'profile-update' profile.id %}" class="btn btn-warm">Edit Profile</a>
+      {% endif %}
+    {% endif %}
   </section>
 
 </section>
+
+<div class="page-header">
+  <div class="title-card">
+    {% if profile.user == request.user %}
+      <h1 class="secondary-title">My Drobe</h1>
+    {% else %}
+      <h1 class="secondary-title">Their Drobe</h1>
+    {% endif %}
+  </div>
+</div>
 
 <section class="drobe-container">
-  <section class="page-header">
-    {% if profile.user == request.user %}
-    <h1>My Drobe</h1>
-    {% else %}
-    <h1>Their Drobe</h1>
-    {% endif %}
-  </section>
-
   <section class="card-container">
     {% if profile.user == request.user and not garment_list.count %}
-    <p>There are not garments in your drobe yet!</p>
-    <a href="{% url 'garment-create' %}" class="add btn">Add your first garment</a>
+      <div class="empty-drobe">
+        <p>There are no garments in your drobe yet!</p>
+        <a href="{% url 'garment-create' %}" class="btn btn-sage">Add your first garment</a>
+      </div>
     {% else %}
-    {% for item in garment_list %}
-    <div class="card">
-      <a href="{% url 'garment-detail' item.id %}">
-        <div class="card-content">
-          <div class="card-img-container">
-            <img src="" alt="" />
-          </div>
-          <h2 class="card-title">{{ item.name }}</h2>
-          <!-- <p>Points value: {{ item.points_value }}</p> -->
+      {% for item in garment_list %}
+      <a href="{% url 'garment-detail' item.id %}" class="card">
+        <div class="card-img-container">
+          {% if item.image %}
+            <img src="{{ item.image.url }}" alt="{{ item.name }}" />
+          {% else %}
+            <img src="{% static 'images/default-garment.png' %}" alt="default garment image" />
+          {% endif %}
         </div>
+        <h2 class="card-title">{{ item.name }}</h2>
       </a>
-    </div>
-    {% endfor %}
+      {% endfor %}
     {% endif %}
   </section>
 </section>
-
 
 {% endblock %}

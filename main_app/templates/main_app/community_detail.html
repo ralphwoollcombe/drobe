@@ -2,70 +2,80 @@
 {% block head %}
 <link
   rel="stylesheet"
-  href="{% static 'css/communities/community_detail.css' %}"
+  href="{% static 'css/communities/community_detail.css' %}?{% now 'U' %}"
 />
 {% endblock %} 
 {% block content %}
-<section class="title-section">
-    <div class="title-card">
-        <h1>{{ community.name }}</h1>
-    </div>
-</section>
-<section class="community-container">
-  <div class="community-img">
-    <img src="" alt="" />
+
+<section class="page-header">
+  <div class="title-card">
+    <h1>{{ community.name }}</h1>
   </div>
-    <div class="community-details">
-        <div class="community-img">
-        {% if community.image %}
-            <img src="{{ community.image.url }}" alt="{{ community.name }}" />
-        {% else %}
-            <img src="{% static 'images/default-community.png' %}" alt="default community image" />
-        {% endif %}
-        </div>
-        <div class="description-card">
-            <h2>Description:</h2>
-            <p>{{ community.description }}</p>
-        </div>
-        <div class="location-card">
-            <h2>Location:</h2>
-            <p>{{community.location}}</p>
-        </div>
-        <div class="style-card">
-            <h2>Style Tags:</h2>
-            <p></p>
-        </div>
-        <div class="members-card">
-            <h2>Members:</h2>
-            {% for member in community.members.all %}
-            <a href="{% url 'profile-detail' member.id %}"><div class="member">
-                <img src="{% static 'images/admin_icon.png' %}" alt="community member icon" />
-                <p>{{ member.first_name }} {{member.last_name}}</p>
-            </div></a>
-            {% endfor %}
-        </div>
-    </div>
-    <section class="buttons">
-    {% if community.created_by == request.user %}
-        <div>     
-            <a href="{% url 'community-update' community.id %}" class="btn warn">Edit Community</a>
-            <a href="{% url 'community-delete' community.id %}" class="btn danger">Delete Community</a>
-        </div>
-    {% elif request.user not in community.members.all %}
-    <form action="{% url 'associate-member' community.id user.id %}" method="post">
-        {% csrf_token %}
-        <button>Join Community</button>
-    </form>
+</section>
+
+<section class="page-container">
+
+  <div class="community-img">
+    {% if community.image %}
+      <img src="{{ community.image.url }}" alt="{{ community.name }}" />
     {% else %}
-    <form action="{% url 'remove-member' community.id user.id %}" method="post">
-        {% csrf_token %}
-        <button>Leave Community</button>
-    </form>
+      <img src="{% static 'images/default-community.png' %}" alt="default community image" />
     {% endif %}
-    </section>
+  </div>
+
+  <div class="community-details">
+
+    <div class="info-row">
+      <div class="info-card">
+        <h2>Location</h2>
+        <span class="tag">{{ community.location }}</span>
+      </div>
+      <div class="info-card">
+        <h2>Style Tags</h2>
+        <div class="tag-group">
+          <span class="tag">Tags coming soon</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="description-card container">
+      <h2>Description</h2>
+      <p>{{ community.description }}</p>
+    </div>
+
+    <div class="members-card container">
+      <h2>Members</h2>
+      <div class="members-grid">
+        {% for member in community.members.all %}
+        <a href="{% url 'profile-detail' member.id %}" class="member">
+          <div class="member-img">
+            <img src="{% static 'images/admin_icon.png' %}" alt="{{ member.first_name }}" />
+          </div>
+          <span class="member-name">{{ member.first_name }} {{ member.last_name }}</span>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+
+  </div>
+
+  <section class="action-bar">
+    {% if community.created_by == request.user %}
+      <a href="{% url 'community-update' community.id %}" class="btn btn-warm">Edit Community</a>
+      <a href="{% url 'community-delete' community.id %}" class="btn btn-danger">Delete Community</a>
+    {% elif request.user not in community.members.all %}
+      <form action="{% url 'associate-member' community.id user.id %}" method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-sage">Join Community</button>
+      </form>
+    {% else %}
+      <form action="{% url 'remove-member' community.id user.id %}" method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-warm">Leave Community</button>
+      </form>
+    {% endif %}
+  </section>
 
 </section>
-    <div>
-    </div>
-</section>
+
 {% endblock %}

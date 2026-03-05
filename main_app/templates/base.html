@@ -7,50 +7,51 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" type="image/png" href="" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=BBH+Bartle&family=Bungee&family=Caveat:wght@400..700&family=Chewy&family=Fjalla+One&family=Freckle+Face&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Londrina+Shadow&family=Mansalva&family=Patrick+Hand&family=Poller+One&family=Ribeye+Marrow&family=Roboto:ital,wght@0,100..900;1,100..900&family=Rock+Salt&family=Shadows+Into+Light&family=Unbounded:wght@200..900&family=Wellfleet&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/base.css' %}" />
     <title>Drobe</title>
     {% block head %} 
     {% endblock %}
   </head>
   <body>
-    <header>
-      <div class="top-nav-bar">
-        <h1>Drobe</h1>
-        <div class="header-logo-container">
-            <a href="/">
-            <img src="" alt="Drobe Logo" />
-            </a>
-        </div>
-      </div>
-      <nav class="bottom-nav-bar">
-            {% if user.is_authenticated %}
+    <header class="top-nav-bar">
+            <h1>Drobe</h1>
+            <div class="header-logo-container">
+                <a href="/">
+                    <img src="" alt="Drobe Logo" />
+                </a>
+            </div>
+    </header>
+    <nav class="bottom-nav-bar">
+        {% if user.is_authenticated %}
         <ul>
-          <li><a href="{% url 'my-profile' %}">Profile</a></li>
-          <li><a href="{% url 'garment-index' %}">My Drobe</a></li>
-          <li><a href="{% url 'community-index' %}">Community</a></li>
-          <li><a href="{% url 'transaction-index' %}">Transactions</a></li>
-          <li><a href="/about">About</a></li>
+            <li><a href="{% url 'my-profile' %}">Profile</a></li>
+            <li><a href="{% url 'garment-index' %}">My Drobe</a></li>
+            <li><a href="{% url 'community-index' %}">Community</a></li>
+            <li><a href="{% url 'transaction-index' %}">Transactions</a></li>
+            <li><a href="/about">About</a></li>
         </ul>
         <ul>
-          <li>
-            <form id="logout-form" method="post" action="{% url 'logout' %}">
-              {% csrf_token %}
-              <button type="submit">Log out</button>
-            </form>
-          </li>
+            <li>
+                <form id="logout-form" method="post" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button type="submit">Log out</button>
+                </form>
+            </li>
         </ul>
-            {% else %}
+        {% else %}
         <ul>
             <li><a href="/about">About</a></li>
             <li><a href="{% url 'home' %}">Login</a></li>
             <li><a href="{% url 'signup' %}">Sign Up</a></li>
         </ul>
-            {% endif %}
-      </nav>
-    </header>
+        {% endif %}
+    </nav>
     <main>
-     {% block content %} 
-     {% endblock %}
-     </main>
+        {% block content %}
+        {% endblock %}
+    </main>
   </body>
 </html>

@@ -2,89 +2,89 @@
 {% block head %}
 <link
   rel="stylesheet"
-  href="{% static 'css/garments/garment_detail.css' %}"
+  href="{% static 'css/garments/garment_detail.css' %}?{% now 'U' %}"
 />
 {% endblock %} 
 {% block content %}
-<section class="title-section">
+<section class="page-header">
     <div class="title-card">
         <h1>{{ garment.name }}</h1>
     </div>
 </section>
-<section class="garment-container">
-  <div class="garment-img">
-    {% if garment.image %}
-        <img src="{{ garment.image.url }}" alt="{{ garment.name }}" />
-    {% else %}
-        <img src="{% static 'images/default-garment.png' %}" alt="default garment image" />
-    {% endif %}
-  </div>
+
+<section class="page-container">
+    <div class="garment-img">
+        {% if garment.image %}
+            <img src="{{ garment.image.url }}" alt="{{ garment.name }}" />
+        {% else %}
+            <img src="{% static 'images/default-garment.png' %}" alt="default garment image" />
+        {% endif %}
+    </div>
+
     <div class="garment-details">
-        <div  class="cat-con-poi-sta">
-            <div class="category-card">
-                <h2>Category:</h2>
-                <p>{{garment.category}}</p>
+        <div class="info-row container">
+            <div class="info-card">
+                <h2>Category</h2>
+                <span class="tag">{{ garment.get_category_display }}</span>
             </div>
-            <div class="condition-card">
-                <h2>Condition:</h2>
-                <p>{{garment.condition}}</p>
+            <div class="info-card">
+                <h2>Condition</h2>
+                <span class="tag">{{ garment.get_condition_display }}</span>
             </div>
-            <div class="points-card">
-                <h2>Points:</h2>
-                <p>{{garment.points_display}}</p>
+            <div class="info-card">
+                <h2>Points</h2>
+                <span class="tag">{{ garment.points_display }}</span>
             </div>
-            <div class="status-card">
-                <h2>Status:</h2>
-                <p>{{garment.get_status_display}}</p>
-            </div>
-        </div>
-        <div class="garment-journey">
-            <div class="journey-card">
+            <div class="info-card">
+                <h2>Status</h2>
+                <span class="tag tag-status">{{ garment.get_status_display }}</span>
             </div>
         </div>
-        <div class="des-sto">
-            <div class="description-card">
-                <h2>Description:</h2>
+
+        <div class="journey-row container">
+            <h2>Garment Journey</h2>
+            <p class="placeholder-text">Journey of transactions will go here</p>
+        </div>
+
+        <div class="text-row">
+            <div class="text-card container">
+                <h2>Description</h2>
                 <p>{{ garment.description }}</p>
             </div>
-            <div class="story-card">
-                <h2>Story:</h2>
+            <div class="text-card container">
+                <h2>Story</h2>
                 <p>{{ garment.story }}</p>
             </div>
         </div>
     </div>
-    <section class="buttons">
-        <div><a href="{% url 'profile-detail' garment.user.id %}"  class="btn">User Profile</a></div>
-      {% if garment.user == request.user %}
-        <div class="garment-actions">
-            <a href="{% url 'garment-update' garment.id %}" class="btn warn">Edit Garment</a>
-            <a href="{% url 'garment-delete' garment.id %}" class="btn danger">Delete</a>
+
+    <section class="action-bar">
+        <a href="{% url 'profile-detail' garment.user.id %}" class="btn btn-sage">View Owner</a>
+        {% if garment.user == request.user %}
+        <div class="owner-actions">
+            <a href="{% url 'garment-update' garment.id %}" class="btn btn-warm">Edit</a>
+            <a href="{% url 'garment-delete' garment.id %}" class="btn btn-danger">Delete</a>
         </div>
         {% elif garment.status == 'available' %}
         <div class="transaction-section">
-            <h3>Initiate Transaction</h3>
             <form action="{% url 'initiate-transaction' garment.id %}" method="post" class="transaction-form">
                 {% csrf_token %}
                 {{ transaction_form.as_p }}
                 {% if garment.listing_type == 'gift' %}
-                    <button type="submit" name="adopt" class="btn submit">Adopt</button>
+                    <button type="submit" name="adopt" class="btn btn-sage">Adopt</button>
                 {% elif garment.listing_type == 'lend' %}
-                    <button type="submit" name="borrow" class="btn submit">Borrow</button>
+                    <button type="submit" name="borrow" class="btn btn-sage">Borrow</button>
                 {% else %}
-                    <button type="submit" name="borrow" class="btn submit">Borrow</button>
-                    <button type="submit" name="adopt" class="btn submit">Adopt</button>
+                    <button type="submit" name="borrow" class="btn btn-sage">Borrow</button>
+                    <button type="submit" name="adopt" class="btn btn-sage">Adopt</button>
                 {% endif %}
             </form>
         </div>
         {% elif garment.status == 'pending' %}
-        <p>This garment has been requested</p>
+        <span class="tag tag-status">Requested</span>
         {% else %}
-        <p>This garment has changed hands!</p>
+        <span class="tag tag-status">{{ garment.status }}</span>
         {% endif %}
     </section>
-
-</section>
-    <div>
-    </div>
 </section>
 {% endblock %}
