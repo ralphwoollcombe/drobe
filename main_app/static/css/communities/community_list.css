@@ -1,4 +1,4 @@
-.drobe-container {
+.community-container {
     max-width: 700px;
     margin: 0 auto 40px;
     padding: 10px 20px 20px;
@@ -7,6 +7,31 @@
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     width: 80%;
+}
+
+.drobe-container {
+    max-width: 700px;
+    margin: 0 auto 40px;
+    padding: 10px 20px 20px;
+    background: var(--primary);
+    border: rgba(125, 97, 70, 0.902);
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    width: 80%;
+}
+#browse {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    max-width: 700px;
+    width: 80%;
+    background: #bd8f60;
+    border: 2px solid rgba(0, 0, 0, 0.06);
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    margin: auto;
+
 }
 
 .card-container {
@@ -134,4 +159,43 @@
 
 .btn-sage:hover {
     background: var(--nav-bg-ff);
+}
+
+
+/* ── Wardrobe Base ── */
+.wardrobe-base {
+    position: relative;
+    width: 84%;                        /* wider than drobe-container (80%) */
+    max-width: 740px;                  /* wider than drobe max-width (700px) */
+    height: 24px;
+    background: var(--primary);
+    margin: -20px auto 20px;              /* pulls up slightly to sit flush */
+    border-radius: 0 0 6px 6px;       /* rounded bottom corners only */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ── Left Foot ── */
+.wardrobe-base::before {
+    content: '';
+    position: absolute;
+    bottom: -14px;                     /* hangs below the base */
+    left: 12%;                         /* inset from edges */
+    width: 40px;
+    height: 14px;
+    background: var(--primary);
+    border-radius: 0 0 4px 4px;       /* rounded bottom corners */
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* ── Right Foot ── */
+.wardrobe-base::after {
+    content: '';
+    position: absolute;
+    bottom: -14px;
+    right: 12%;
+    width: 40px;
+    height: 14px;
+    background: var(--primary);
+    border-radius: 0 0 4px 4px;
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.1);
 }

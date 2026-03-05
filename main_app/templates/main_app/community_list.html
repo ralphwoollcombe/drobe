@@ -13,7 +13,7 @@
   </div>
 </section>
 
-<section class="drobe-container">
+<section class="community-container">
   <section class="card-container">
     {% if not community_list.count %}
       <div class="empty-drobe">
@@ -48,14 +48,13 @@
   </section>
 </section>
 
-<div class="page-header" id="browse">
-  <div class="title-card">
-    <h1>Browse Communities</h1>
-  </div>
-</div>
 
+
+<div id="browse">
+      <h1>Browse Communities</h1>
+  </div>
 <section class="drobe-container">
-  <section class="card-container">
+<section class="card-container">
     {% if not other_communities.count %}
       <div class="empty-drobe">
         <p>No other communities to show right now.</p>
@@ -81,6 +80,9 @@
       {% endfor %}
     {% endif %}
   </section>
+</section>
+<section class="page-header">
+<div class="wardrobe-base"></div>
 </section>
 
 <section class="buttons">
