@@ -106,10 +106,6 @@ class CommunityCreate(LoginRequiredMixin, CreateView):
 class CommunityDetail(LoginRequiredMixin, DetailView):
     model = Community
 
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     return context
-
 class CommunityUpdate(LoginRequiredMixin, UpdateView):
     model = Community
     fields = ['name', 'description', 'location', 'style_focus']
@@ -265,9 +261,3 @@ def signup(request):
     form = UserCreationForm()
     context = {'form': form, 'error_message': error_message}
     return render(request, 'signup.html', context)
-    # Same as: 
-    # return render(
-    #     request, 
-    #     'signup.html',
-    #     {'form': form, 'error_message': error_message}
-    # )
