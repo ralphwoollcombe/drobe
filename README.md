@@ -1,6 +1,6 @@
 # 👗 Drobe
 
-📋 **[Screenshot](⚠️ ADD HERE)**
+URL static/images/screenshot-my_drobe.png
 
 ## Description
 
