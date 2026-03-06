@@ -1,6 +1,6 @@
 # 👗 Drobe
 
-(insert screenshot)
+📋 **[Screenshot](⚠️ ADD HERE)**
 
 ## Description
 
@@ -25,44 +25,7 @@ local communities — all wrapped up in a wardrobe-inspired UI.
 
 ### Points System (Foundation)
 
-Every garment is assigned a points value based on its condition — laying 
-the groundwork for a future exchange economy:
-
-|
- Condition 
-|
- Points 
-|
-|
------------
-|
---------
-|
-|
- Poor      
-|
- 1      
-|
-|
- Fair      
-|
- 2      
-|
-|
- Good      
-|
- 4      
-|
-|
- Very Good 
-|
- 8      
-|
-|
- Excellent 
-|
- 11     
-|
+Every garment is assigned a points value based on its condition — demonitizing exchange:
 
 New users start with **10 points**.
 
@@ -91,75 +54,71 @@ New users start with **10 points**.
   and management
 - **[Google Fonts — Aref Ruqaa](https://fonts.google.com/specimen/Aref+Ruqaa)** 
   — Header/logo font
-- ⚠️ ADD ANY OTHER LIBRARIES, ICONS, OR ASSETS YOU USED
+- **[Canva](https://canva.com/)** — To make the icons and logo
 
 ## Technologies Used
 
 - **Python**
 - **Django** — Web framework (MVT architecture)
-- **PostgreSQL** — Database (⚠️ or SQLite if using that)
+- **PostgreSQL** — Database
 - **Cloudinary** — Image upload and storage
-- **HTML5** — Templating with Django Template Language
-- **CSS3** — Custom styling (no CSS frameworks)
-  - CSS Custom Properties (variables)
+- **HTML** — Templating with Django Template Language
+- **CSS** — Custom styling
+  - CSS Custom Properties
   - Flexbox layouts
-  - CSS `clip-path` for decorative wardrobe-themed UI
-  - CSS pseudo-elements (`::before` / `::after`) for wardrobe feet 
-    and border effects
   - Responsive design with media queries
 - **Git / GitHub** — Version control
-- ⚠️ **Heroku** (or whatever platform you deployed on)
 
 ## Next Steps
 
 ### Core Functionality
-- [ ] **Transaction System** — Allow users to request, approve, and 
+- **Transaction System** — Allow users to request, approve, and 
       decline garment exchanges (gift, lend, borrow) with points-based 
       economy
-- [ ] **Transaction Dashboard** — Filtered views for incoming/outgoing 
+- **Transaction Dashboard** — Filtered views for incoming/outgoing 
       transactions, pending requests, and transaction history
-- [ ] **Points Exchange** — Automated points transfer between users 
+- **Points Exchange** — Automated points transfer between users 
       when transactions are approved
 
 ### Styles & Discovery
-- [ ] **Styles Model** — Create a styles system (e.g. vintage, 
+- **Styles Model** — Create a styles system (e.g. vintage, 
       streetwear, minimalist, formal) that can be linked to user 
       profiles and attached as tags to communities, helping users 
       discover the right communities for them
 
 ### Community Features
-- [ ] **Community Authentication** — Implement an approval-based 
+- **Community Authentication** — Implement an approval-based 
       join system so community admins can vet and approve new 
       members rather than allowing open access
-- [ ] **Community Chat** — In-app messaging between community members
+- **Community Chat** — In-app messaging between community members
 
 ### Garment Features
-- [ ] **Favourites** — Allow users to favourite garments in other 
+- **Favourites** — Allow users to favourite garments in other 
       people's Drobes, creating a wishlist of pieces they love
-- [ ] **Garment Stories (One-to-Many)** — Evolve the story field into 
+- **Garment Stories (One-to-Many)** — Evolve the story field into 
       a one-to-many relationship so that anyone who has borrowed a 
       garment can add their own story about their time with it
-- [ ] **Garment Journey Timeline** — A visual timeline showing every 
+- **Garment Journey Timeline** — A visual timeline showing every 
       person a garment has passed through, tracking its path from 
       owner to owner as a one-to-many relationship
-- [ ] **Outfit Photos** — A photos section on the garment page where 
+- **Outfit Photos** — A photos section on the garment page where 
       borrowers can upload pictures of themselves wearing the piece, 
       building a gallery of the garment in action
 
 ### UI & Personalisation
-- [ ] **Wardrobe Door Animation** — Animated wardrobe doors that open 
+- **Wardrobe Door Animation** — Animated wardrobe doors that open 
       when a user visits their Drobe page, revealing their garments 
       inside
-- [ ] **Drobe Personalisation** — Let users customise their wardrobe 
+- **Drobe Personalisation** — Let users customise their wardrobe 
       appearance (wood colour, door style, name plate) to make their 
       Drobe feel like their own
-- [ ] **Search and Filtering** — Search garments by name, category, 
+- **Search and Filtering** — Search garments by name, category, 
       size, and condition across the platform
-- [ ] **User Ratings and Reviews** — Rate transactions to build trust 
+- **User Ratings and Reviews** — Rate transactions to build trust 
       within the community
-- [ ] **Notification System** — Alert users when their garments are 
+- **Notification System** — Alert users when their garments are 
       requested or transactions are approved/declined
-- [ ] **Profile Badges** — Earn badges for milestones (first garment 
+- **Profile Badges** — Earn badges for milestones (first garment 
       shared, community creator, etc.)
-- [ ] **Map View for Communities** — Browse communities on an 
+- **Map View for Communities** — Browse communities on an 
       interactive map based on location
