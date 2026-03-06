@@ -2,6 +2,7 @@
 {% load static %}
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/form.css' %}?{% now 'U' %}" />
+<link rel="stylesheet" href="{% static 'css/home.css' %}?{% now 'U' %}" />
 {% endblock %}
 {% block content %}
 
@@ -55,6 +56,11 @@
   </div>
 </section>
 
+<section class="home-title">
+  <h1>Drobe</h1>
+  <img class="drobe-icon" src="{% static 'images/drobe-icon.png' %}" alt="Drobe Icon"/>
+</section>
+
 <section class="form-wrapper welcome-wrapper">
   <div class="welcome-content">
     <h2>What would you like to do?</h2>
@@ -62,7 +68,6 @@
       <a href="{% url 'my-profile' %}" class="btn btn-sage">My Profile</a>
       <a href="{% url 'garment-index' %}" class="btn btn-sage">My Drobe</a>
       <a href="{% url 'community-index' %}" class="btn btn-sage">Communities</a>
-      <!-- <a href="{% url 'transaction-index' %}" class="btn btn-warm">Transactions</a> -->
     </div>
   </div>
 </section>

@@ -123,6 +123,10 @@
     color: var(--text);
 }
 
+.tag-location .tag {
+    border-radius: 2px;
+}
+
 .tag-members {
     background: var(--nav-bg);
     color: white;
@@ -267,6 +271,10 @@
     .tag {
         font-size: 1.1rem;
         padding: 4px 12px;
+    }
+
+    .tag-location .tag {
+    border-radius: 2px;
     }
 
     .empty-drobe p {
