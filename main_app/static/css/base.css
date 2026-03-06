@@ -158,6 +158,10 @@ nav ul {
     color: rgb(78, 43, 0);
   }
 
+  .drobe-icon {
+    height: 54px;
+    margin: 0;
+  }
 .page-header {
   filter: drop-shadow(3px 3px 4px #aaa); 
 }
@@ -255,7 +259,7 @@ nav ul {
     content: '';
     position: absolute;
     bottom: -14px;                
-    left: 12%;                        
+    left: 3%;                        
     width: 40px;
     height: 14px;
     background: var(--primary);
@@ -267,7 +271,7 @@ nav ul {
     content: '';
     position: absolute;
     bottom: -14px;
-    right: 12%;
+    right: 3%;
     width: 40px;
     height: 14px;
     background: var(--primary);
@@ -275,16 +279,22 @@ nav ul {
     box-shadow: 0 3px 4px rgba(0, 0, 0, 0.1);
 }
 
+
+.hanger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+
+.hanger-icon {
+  height: 44px;
+  width: 44px;
+}
+
 @media only screen and (min-width: 768px) {
 
-    header {
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-        flex-direction: row;
-        align-items: center;
-        padding: 12px 30px;
-    }
 
     header h1 {
         font-size: var(--font-xxl);
@@ -304,10 +314,6 @@ nav ul {
     nav a, button {
         font-size: 1.4rem;
         padding: 6px 14px;
-    }
-
-    .bottom-nav-bar {
-        padding: 10px 30px;
     }
 
     main {

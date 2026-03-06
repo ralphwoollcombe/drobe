@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=BBH+Bartle&family=Bungee&family=Caveat:wght@400..700&family=Chewy&family=Fjalla+One&family=Freckle+Face&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Londrina+Shadow&family=Mansalva&family=Patrick+Hand&family=Poller+One&family=Ribeye+Marrow&family=Roboto:ital,wght@0,100..900;1,100..900&family=Rock+Salt&family=Shadows+Into+Light&family=Unbounded:wght@200..900&family=Wellfleet&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/base.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/base.css' %}?{% now 'U' %}" />
     <title>Drobe</title>
     {% block head %} 
     {% endblock %}
@@ -20,7 +20,7 @@
             <h1>Drobe</h1>
             <div class="header-logo-container">
                 <a href="/">
-                    <img src="" alt="Drobe Logo" />
+                    <img src="{% static 'images/drobe-icon.png' %}" class="drobe-icon" alt="Drobe Logo" />
                 </a>
             </div>
     </header>

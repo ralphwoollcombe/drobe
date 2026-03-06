@@ -80,16 +80,19 @@
       </div>
     {% else %}
       {% for item in garment_list %}
-      <a href="{% url 'garment-detail' item.id %}" class="card">
-        <div class="card-img-container">
-          {% if item.image %}
-            <img src="{{ item.image.url }}" alt="{{ item.name }}" />
-          {% else %}
-            <img src="{% static 'images/default-garment.png' %}" alt="default garment image" />
-          {% endif %}
-        </div>
-        <h2 class="card-title">{{ item.name }}</h2>
-      </a>
+      <div class="hanger">
+        <img class="hanger-icon" src="{% static 'images/hanger-icon.png' %}" alt="hanger icon"/>
+          <a href="{% url 'garment-detail' item.id %}" class="card">
+            <div class="card-img-container">
+              {% if item.image %}
+                <img src="{{ item.image.url }}" alt="{{ item.name }}" />
+              {% else %}
+                <img src="{% static 'images/default-garment.png' %}" alt="default garment image" />
+              {% endif %}
+            </div>
+            <h2 class="card-title">{{ item.name }}</h2>
+          </a>
+      </div>
       {% endfor %}
     {% endif %}
   </section>

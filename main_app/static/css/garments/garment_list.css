@@ -15,8 +15,9 @@
     flex-wrap: wrap;
     gap: 20px;
     justify-content: center;
-    padding: 10px 0;
+    padding: 0;
 }
+
 
 .card {
     display: flex;
@@ -133,7 +134,7 @@
 
     .card-container {
         gap: 24px;
-        padding: 14px 0;
+        padding: 0;
     }
 
     .card {

@@ -1,12 +1,74 @@
 {% extends 'base.html' %} 
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/about.css' %}?{% now 'U' %}" />
+{% endblock %}
 {% block content %}
 
-<h1>About Drobe</h1>
-<hr />
-<p class="page-content">
-The shared community wardrobe.
+<section class="page-header">
+  <div class="title-card">
+    <h1>About Drobe</h1>
+  </div>
+</section>
 
-Send your garment on a journey.
-</p>
+<section class="about-container">
+
+  <div class="about-hero">
+    <h2 class="about-tagline">The shared community wardrobe.</h2>
+    <p class="about-subtitle">Send your garment on a journey.</p>
+  </div>
+
+  <div class="about-section">
+    <h2>What is Drobe?</h2>
+    <p>
+      Drobe is a community-driven wardrobe sharing platform built with the 
+      philosophy that fashion should be circular, not disposable. We believe 
+      every garment has a story — and that story shouldn't end at the back 
+      of your wardrobe.
+    </p>
+  </div>
+
+  <div class="about-section">
+    <h2>How It Works</h2>
+    <div class="about-steps">
+      <div class="step">
+        <span class="step-number">1</span>
+        <h3>List Your Garments</h3>
+        <p>Add pieces from your wardrobe with photos, descriptions, and the story behind each item.</p>
+      </div>
+      <div class="step">
+        <span class="step-number">2</span>
+        <h3>Join Communities</h3>
+        <p>Find local groups that match your style and connect with like-minded people.</p>
+      </div>
+      <div class="step">
+        <span class="step-number">3</span>
+        <h3>Share & Discover</h3>
+        <p>Browse other people's Drobes, discover new styles, and give your garments a new life.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="about-section">
+    <h2>Why Drobe?</h2>
+    <p>
+      The average garment is worn just seven times before being thrown away. 
+      Drobe is here to change that. By sharing, lending, and gifting clothes 
+      within your community, you're not just refreshing your wardrobe — you're 
+      reducing waste, saving money, and building connections.
+    </p>
+  </div>
+
+  <div class="about-cta">
+    {% if not user.is_authenticated %}
+      <p>Ready to open your Drobe?</p>
+      <a href="{% url 'signup' %}" class="btn btn-sage">Get Started</a>
+    {% else %}
+      <p>Ready to share?</p>
+      <a href="{% url 'garment-create' %}" class="btn btn-sage">Add a Garment</a>
+    {% endif %}
+  </div>
+
+</section>
 
 {% endblock %}

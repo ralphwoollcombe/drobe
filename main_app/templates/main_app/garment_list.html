@@ -22,22 +22,25 @@
       </div>
     {% else %}
       {% for item in garment_list %}
-      <a href="{% url 'garment-detail' item.id %}" class="card">
-        <div class="card-img-container">
-          {% if item.image %}
-            <img src="{{ item.image.url }}" alt="{{ item.name }}" />
-          {% else %}
-            <img src="{% static 'images/default-garment.png' %}" alt="default garment image" />
-          {% endif %}
-        </div>
-        <div class="card-info">
-          <h2 class="card-title">{{ item.name }}</h2>
-          <div class="card-tags">
-            <span class="tag tag-category">{{ item.category }}</span>
-            <span class="tag tag-points">{{ item.points_display }}</span>
+      <div class="hanger">
+        <img class="hanger-icon" src="{% static 'images/hanger-icon.png' %}" alt="hanger icon"/>
+        <a href="{% url 'garment-detail' item.id %}" class="card">
+          <div class="card-img-container">
+            {% if item.image %}
+              <img  src="{{ item.image.url }}" alt="{{ item.name }}" />
+            {% else %}
+              <img src="{% static 'images/default-garment.png' %}" alt="default garment image" />
+            {% endif %}
           </div>
-        </div>
-      </a>
+          <div class="card-info">
+            <h2 class="card-title">{{ item.name }}</h2>
+            <div class="card-tags">
+              <span class="tag tag-category">{{ item.category }}</span>
+              <span class="tag tag-points">{{ item.points_display }}</span>
+            </div>
+          </div>
+        </a>
+      </div>
       {% endfor %}
     {% endif %}
   </section>
