@@ -55,8 +55,6 @@
     {% else %}
       {% for community in other_communities %}
       <a href="{% url 'community-detail' community.id %}" class="card">
-        <div class="card-img-container">
-        </div>
         <div class="card-info">
           <h2 class="card-title">{{ community.name }}</h2>
           <div class="card-tags">
