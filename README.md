@@ -1,7 +1,5 @@
 # 👗 Drobe
 
-📋 **[Screenshot](⚠️ ADD HERE)**
-
 ## Description
 
 Drobe is a community-driven wardrobe sharing platform built with the 
@@ -31,9 +29,12 @@ New users start with **10 points**.
 
 ## Getting Started
 
-🔗 **[Launch Drobe](⚠️ ADD YOUR DEPLOYED URL HERE)**
+🔗 **[Launch Drobe]**
+https://ga-project-4-drobe-f5b59a82a212.herokuapp.com/
 
-📋 **[Planning Materials](⚠️ ADD YOUR PLANNING MATERIALS URL HERE)**
+📋 **[Planning Materials]**
+Figma - https://www.figma.com/design/pDOIlLk5Hfkb04mOvmVcNJ/Drobe---Project-4?t=vdhZqpppZWcjL1TI-0
+ERD - https://dbdiagram.io/d/Drobe-69a18c6aa3f0aa31e14e0b64
 
 ### Current Features
 
